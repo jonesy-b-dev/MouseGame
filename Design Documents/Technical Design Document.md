@@ -8,17 +8,30 @@
 ## Engine
 In the main.cpp we kickoff all the needed systems for the game, this includes:
 * Engine class
-* Game class
 
-### MoSCoW explanation
-* [Mo] = Must have
-* [S] = Should have
-* [Co] = Could have
-* [W] = Will not have
 
+## Notes
+* Input class?
+* Engine class
+  * Manages all objects
+  * Has start, update shutdown function where all the according functions are called from the objects. 
+* Object class
+    * Transform
+    * HasCollision bool
+    * Simple collision funciton 
+    * Start()
+    * Update()
+    * ShutDown()
+    * Player enemy and ui will inherit from object class
+    * Objects are created and managed in the engine 
+* Collision
+* Player class : object
+    * Hunger
+    * Has collision
+* Food class : object 
 ### Player
-* [Mo] Player can move around using keybinds "WASD" 
-* [Mo] Player can collect food by touching it.
+* [Mo] Player can move around using keybinds "WASD" // Input class?
+* [Mo] Player can collect food by touching it. // 
 * [Mo] Food will spawn randomly in the game view.
 * [Mo] Player can eat with keybind "e" to replenish his own hunger with 25%.
 * [Mo] Player has a house on the left of the screen which is where his family lives. Here he can stay safe from danger.

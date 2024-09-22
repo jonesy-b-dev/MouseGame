@@ -18,6 +18,8 @@ In the main.cpp we kickoff all the needed systems for the game, this includes:
 * Object class
     * Transform
     * HasCollision bool
+    * Speed float, will be lowered when picking up food
+    * Vector of food items that will be linked ot the speed float 
     * Simple collision funciton 
     * Start()
     * Update()
@@ -29,6 +31,12 @@ In the main.cpp we kickoff all the needed systems for the game, this includes:
     * Hunger
     * Has collision
 * Food class : object 
+  * Spawns randomly through the map, function that creates the objects randomly with random positions.
+  * Random position when spawning
+  * When player collides with food it despawns and refills hunger of the player
+* Enemy class : object
+  * Will spawn in the same way as food but outside of the game view and move into the screen
+  * Will choose a random position in the game view to move towards
 ### Player
 * [Mo] Player can move around using keybinds "WASD" // Input class?
 * [Mo] Player can collect food by touching it. // 

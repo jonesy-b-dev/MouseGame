@@ -6,30 +6,54 @@
 * Graphics API: OpenGl
 
 ## Engine
-In the main.cpp we kickoff all the needed systems for the game, this includes:
-* Engine class
+In the `main.cpp` we kickoff all the needed systems like the engine class.
 
+Everything in this project will be based on objects. 
+The engine will store a `std::vector` of all the object in the game. In the start update and shutdown functions we will loop over all the objects in the game and call the according function of the object.
+The engine will also include the broiler plate SFML code, like the main while loop.
 
+## Object class
+An object in the engine will be the base of every other object in the game like audio player, enemies UI and audio. 
+The object class is defined in `object.hpp` and implemented in `object.cpp`. 
+
+The object class will have the following properties:
+* Transform transform;
+* sf::Sprite sprite;
+* Start();
+* Update();
+* Shutdown();
+* HasCollision bool (Would be false for ui/audio)
+* Collision functionality
+
+The Transform is a custom struct we implement with the following properties:
+* Vector2 position;
+* float rotation;
+* Vector3 scale;
+
+The Vector2 is also a custom struct we implement with the following properties:
+* float x;
+* float y;
+
+## Player : object
+The player is class inherited from the object class. The player class will have the following properties:
+* Everything the object class has
+* HasCollision set to true
+* float hunger (stores the current hunger value, game over when it reaches 0)
+* float speed;
+* int foodInventory (stores the amount of food items in the inventory)
+The input of the player is managed here too. For the movement the Transform.position vector is edited. 
+When the player collides with a food item the hunger value goes up by 10 is is capped at 100. 
+The hunger value goes down by 1 every 3 seconds(might change if too slow or too fast), the time we calculate with the deltaTime from the time class. 
+The speed is also affected by this, we use this formula to calculate the speed: `speed = defaultSpeed * (reductionValue)^foodItemAmount` for example: `speed = 100 * (0.95)^4` for when the player has 4 food items in his inventory
+
+## Time class
+The time class will store simple timing functionality. The time class will look something like [this](https://github.com/OuterCelestics/StellarEngine/blob/master/StellarEngine/source/engine/components/time/Time.cpp) (something I made for another project) 
+
+## Food : object
+Food will spawn randomly throughout the map with the SpawnFood() function. We call this function every random few seconds using a counter using the deltaTime and a random number (seconds) to call the function.
+
+* double deltaTime (interval in seconds from the last frame to the current frame)
 ## Notes
-* Input class?
-* Engine class
-  * Manages all objects
-  * Has start, update shutdown function where all the according functions are called from the objects. 
-* Object class
-    * Transform
-    * HasCollision bool
-    * Speed float, will be lowered when picking up food
-    * Vector of food items that will be linked ot the speed float 
-    * Simple collision funciton 
-    * Start()
-    * Update()
-    * ShutDown()
-    * Player enemy and ui will inherit from object class
-    * Objects are created and managed in the engine 
-* Collision
-* Player class : object
-    * Hunger
-    * Has collision
 * Food class : object 
   * Spawns randomly through the map, function that creates the objects randomly with random positions.
   * Random position when spawning

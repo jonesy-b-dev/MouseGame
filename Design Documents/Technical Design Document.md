@@ -37,69 +37,52 @@ The Vector2 is also a custom struct we implement with the following properties:
 ## Player : object
 The player is class inherited from the object class. The player class will have the following properties:
 * Everything the object class has
+* bool isSafe (will be true when player is inside the range of the house, enemies cant attack there)
 * HasCollision set to true
 * float hunger (stores the current hunger value, game over when it reaches 0)
 * float speed;
+* float health; (When player is hit by enemy this variable gets reduced)
 * int foodInventory (stores the amount of food items in the inventory)
+* TakeDamage(float damage)
+* Death() (when this is called the game is over)
+* HandleInput() (here all the input and movement is handelded)
+* Eat() (when the keybind 'e' is pressed 1 food item wil be removed from the foodInverntory and hunger allue will be increased by 10 (max 100))
+
 The input of the player is managed here too. For the movement the Transform.position vector is edited. 
 When the player collides with a food item the hunger value goes up by 10 is is capped at 100. 
 The hunger value goes down by 1 every 3 seconds(might change if too slow or too fast), the time we calculate with the deltaTime from the time class. 
-The speed is also affected by this, we use this formula to calculate the speed: `speed = defaultSpeed * (reductionValue)^foodItemAmount` for example: `speed = 100 * (0.95)^4` for when the player has 4 food items in his inventory
+The speed is also affected by this, we use this formula to calculate the speed: `speed = defaultSpeed * (reductionValue)^foodItemAmount` for example: `speed = 100 * (0.95)^4` for when the player has 4 food items in his inventory.
+For every food you bring back the score varible in the ui score object will go up by 1.
+
+When colliding with an enemy it will take damage.
 
 ## Time class
 The time class will store simple timing functionality. The time class will look something like [this](https://github.com/OuterCelestics/StellarEngine/blob/master/StellarEngine/source/engine/components/time/Time.cpp) (something I made for another project) 
 
 ## Food : object
-Food will spawn randomly throughout the map with the SpawnFood() function. We call this function every random few seconds using a counter using the deltaTime and a random number (seconds) to call the function.
+Food will spawn randomly throughout the map with the SpawnFood() function. We call this function every random few seconds using a counter using the deltaTime and a random number (seconds) to call the function. It will have an randomized position.
 
+Properties:
 * double deltaTime (interval in seconds from the last frame to the current frame)
-## Notes
-* Food class : object 
-  * Spawns randomly through the map, function that creates the objects randomly with random positions.
-  * Random position when spawning
-  * When player collides with food it despawns and refills hunger of the player
-* Enemy class : object
-  * Will spawn in the same way as food but outside of the game view and move into the screen
-  * Will choose a random position in the game view to move towards
-### Player
-* [Mo] Player can move around using keybinds "WASD" // Input class?
-* [Mo] Player can collect food by touching it. // 
-* [Mo] Food will spawn randomly in the game view.
-* [Mo] Player can eat with keybind "e" to replenish his own hunger with 25%.
-* [Mo] Player has a house on the left of the screen which is where his family lives. Here he can stay safe from danger.
-* [Mo] Player will lose if his hunger or health is 0.
-* [Mo] When player returns food to the house family hunger will go up by 10%.
-* [S] Player has hunger displayed in a ui element.
-* [S] Player slows down by 10% for every food item he will pick up.
-* [W] Player can attack enemies by clicking on them when in close range.
 
-### Enemies
-* [Mo] Enemies will slowly spawn in from the right, and a new enemy will spawn in every 20 seconds.
-* [Mo] Enemies will roam around the play field.
-* [S] When player gets within a certain range of an enemy it will attack the player.
+## Enemy : object
+Enemies will spawn in the same way as food but outside of the game view and move into the screen to a random position in the game view using the `FindNewPosition()` and `MoveToPostition`.
+When the enemy gets within a certain range of the player it will move towards the player. When that happens it will simple take the players position for his next move. When the enemy touches the player it will call it's `TakeDamage(damage)` function.
+When the enemy is clicked by the pointer device it will take damage and after 5 clicks the enemy will die. 
 
-### Audio
-* [M] Audio when picking up food
-* [S] Audio when bring back food
-* [S] Audio when eating food
-* [S] Audio when taking damage
-* [Co] Audio when clicking on UI elements
-* [W] Walking audio 
-* [W] Background music
+Properties:
+* int health
+* FindNewPosition()
+* MoveToPosition
+* TakeDamage(int damage)
 
-### Other
-* [Mo] Family has same hunger system as the player.
-* [S] You gain score from collecting food items.
-* [Co] Score will be stored in a .txt file and shown in a UI.
+## House : object 
+The house is places on the left side of the screen and has a diffrent kind of collision and acts more as a trigger, when the player enters the house all food items will be removed and for every food item delivered the house hunger goes up by 5%. When the house hunger reaches 0 we call the Death funciton in the player(The same happens when the player days so we can use this funciton)
+Properties:
+* float hunger;
 
-### Extra (in case of time left over)
-* [W] Main menu system with a start, highscore and quit button.
+## UI : object
+All ui is implemented as an object and is just a sprite rendered after everything of the game is rendered. Has no collision. The UI objects are stored in another vector of objects but works the same as the normal objects but is looped over after the normak game objects.
 
----
-
-## Game visualisation
-![GameLayout](GameLayout.png)
-
-## Non-functional requirements
-* Needs to have complete game loop
-* Should not have lag spikes and run above 60fps all the time. 
+## Audio
+Audio is implemented right in the object where it needs to be played. No special class needed for this.

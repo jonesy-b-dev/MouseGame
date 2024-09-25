@@ -6,9 +6,9 @@ namespace Engine
 	{
 	public:
 		Transform transform;
-		void Start();
-		void Update();
-		void Shutdown();
+		virtual void Start();
+		virtual void Update();
+		virtual void Shutdown();
 
 	private:
 		bool m_HasCollision;

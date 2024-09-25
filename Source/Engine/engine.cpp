@@ -1,15 +1,16 @@
 #include "engine.h"
+#include <../Game/Player/Player.h>
 
 void Engine::EngineCore::Start()
 {
-    Object player;
-    gameObjects.insert(gameObjects.begin(), player);
+    Player player;
+    gameObjects.insert(gameObjects.begin(), &player);
 
     shape = sf::CircleShape(100.f);
     window.create(sf::VideoMode(1300, 800), "SFML works!");
-    for each (Object object in gameObjects)
+    for each (Object* object in gameObjects)
     {
-        object.Start();
+        object->Start();
     }
     shape.setFillColor(sf::Color::Green);
 
@@ -27,9 +28,9 @@ void Engine::EngineCore::Update()
                 window.close();
         }
 
-        for each (Object object in gameObjects)
+        for each (Object* object in gameObjects)
         {
-            object.Update();
+            object->Update();
         }
 
         window.clear();
@@ -41,8 +42,8 @@ void Engine::EngineCore::Update()
 
 void Engine::EngineCore::Shutdown()
 {
-    for each (Object object in gameObjects)
+    for each (Object* object in gameObjects)
     {
-        object.Shutdown();
+        object->Shutdown();
     }
 }

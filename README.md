@@ -7,3 +7,8 @@ A simple 2D game about collecting food as a mouse made in SFML 2.6.1. You slowly
 * Clone repository
 * Make sure to either have premake5 in your `$PATH` or have the `premake5.exe` in the root of the repository.
 * Run premake5 for your desired editor e.g. `premake5 vs2022`
+
+
+# How to run from outside Visual Studio
+When running the projct from Visual Studio the working directory is the project directory. 
+When running outside of Visual Studio copy the `Assets` directory to the executable location.

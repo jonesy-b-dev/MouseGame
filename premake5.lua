@@ -1,6 +1,6 @@
 workspace "MouseGame"
     configurations { "Debug", "Release", "Dist" }
-   architecture "x64"
+    architecture "x64"
 
 project "MouseGame"
     kind "ConsoleApp"
@@ -17,7 +17,9 @@ project "MouseGame"
     }
 
     includedirs{
-        "Dependencies/SFML-2.6.1/include"
+        "Dependencies/SFML-2.6.1/include",
+        -- Engine headers
+        "source/Engine"
     }
 
     libdirs{"Dependencies/SFML-2.6.1/lib"}

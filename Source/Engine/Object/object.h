@@ -1,13 +1,16 @@
 #pragma once
 #include "../Transform/Transform.h"
-class Object
+namespace Engine
 {
-public: 
-	Transform transform;
-	void Start();
-	void Update();
-	void Shutdown();
+	class Object
+	{
+	public:
+		Transform transform;
+		void Start();
+		void Update();
+		void Shutdown();
 
-private:
-	bool m_HasCollision;
-};
+	private:
+		bool m_HasCollision;
+	};
+}

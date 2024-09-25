@@ -1,6 +1,8 @@
 #pragma once
-class Vector2
+namespace Engine
 {
-	float x, y;
-};
-
+	class Vector2
+	{
+		float x, y;
+	};
+}

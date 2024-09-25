@@ -1,16 +1,16 @@
 #include "object.h"
 #include <iostream>
-void Object::Start()
+void Engine::Object::Start()
 {
 	std::cout << "Created object";
 }
 
-void Object::Update()
+void Engine::Object::Update()
 {
 	std::cout << "Updated object\n";
 }
 
-void Object::Shutdown()
+void Engine::Object::Shutdown()
 {
 	std::cout << "Shutdown object";
 }

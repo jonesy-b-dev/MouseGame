@@ -10,10 +10,9 @@ namespace Engine
 	public: 
 		void Start();
 	private:
+		sf::RenderWindow window;
 		std::vector<Object*> gameObjects;
 		std::vector<Object*> uiObjects;
-		sf::RenderWindow window;
-		sf::CircleShape shape;
 		void Update();
 		void Shutdown();
 	};

@@ -4,7 +4,7 @@
 
 class Player : public Engine::Object
 {
-	void Start() override;
+	void Start(sf::RenderWindow* window) override;
 	void Update() override;
 	void Shutdown() override;
 };

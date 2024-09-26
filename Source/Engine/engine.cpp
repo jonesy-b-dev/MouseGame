@@ -1,10 +1,12 @@
 #include "engine.h"
 #include <../Game/Player/Player.h>
+#include "Time/Time.h"
+
 using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
-    Player player(Transform(Vector2(50, 50), 0, Vector2(0.2, 0.2)), true);
+    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
 
     gameObjects.insert(gameObjects.begin(), &player);
 
@@ -27,6 +29,8 @@ void Engine::EngineCore::Update()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        // Update the time class
+        Engine::Time::UpdateTime();
 
         window.clear();
 

@@ -24,6 +24,7 @@ void Engine::Object::Update()
 	//std::cout << "Updated object\n";
 	sprite.setPosition(transform.position.x, transform.position.y);
 	sprite.setScale(transform.scale.x, transform.scale.y);
+	sprite.setRotation(transform.rotation);
 	m_window->draw(sprite);
 }
 

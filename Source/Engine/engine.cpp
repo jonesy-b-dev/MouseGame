@@ -4,7 +4,7 @@ using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
-    Player player(Transform(Vector2(5, 5), 0, Vector2(1, 1)), true);
+    Player player(Transform(Vector2(50, 50), 0, Vector2(0.2, 0.2)), true);
 
     gameObjects.insert(gameObjects.begin(), &player);
 

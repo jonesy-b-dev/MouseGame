@@ -22,6 +22,8 @@ void Engine::Object::Start(sf::RenderWindow* window)
 void Engine::Object::Update()
 {
 	//std::cout << "Updated object\n";
+	sprite.setPosition(transform.position.x, transform.position.y);
+	sprite.setScale(transform.scale.x, transform.scale.y);
 	m_window->draw(sprite);
 }
 

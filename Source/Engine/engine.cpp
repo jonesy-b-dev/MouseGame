@@ -1,9 +1,11 @@
 #include "engine.h"
 #include <../Game/Player/Player.h>
+using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
-    Player player;
+    Player player(Transform(Vector2(5, 5), 0, Vector2(1, 1)), true);
+
     gameObjects.insert(gameObjects.begin(), &player);
 
     window.create(sf::VideoMode(width, height), windowName);

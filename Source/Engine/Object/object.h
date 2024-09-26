@@ -10,6 +10,7 @@ namespace Engine
 		virtual void Start(sf::RenderWindow* window);
 		virtual void Update();
 		virtual void Shutdown();
+		Object(Engine::Transform transform, bool hasCollision) : transform(transform),  m_HasCollision(hasCollision){};
 	protected:
 		bool m_HasCollision;
 		const char* spritePath = NULL;

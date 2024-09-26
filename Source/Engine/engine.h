@@ -2,6 +2,8 @@
 #include "Object/object.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <Transform/Transform.h>
+#include <Vector2/Vector2.h>
 
 namespace Engine
 {

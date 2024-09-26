@@ -8,7 +8,7 @@ namespace Engine
 	class EngineCore
 	{
 	public: 
-		void Start();
+		void Start(const char* windowName, int width, int height);
 	private:
 		sf::RenderWindow window;
 		std::vector<Object*> gameObjects;

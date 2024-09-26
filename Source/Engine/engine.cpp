@@ -1,12 +1,12 @@
 #include "engine.h"
 #include <../Game/Player/Player.h>
 
-void Engine::EngineCore::Start()
+void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
     Player player;
     gameObjects.insert(gameObjects.begin(), &player);
 
-    window.create(sf::VideoMode(1300, 800), "SFML works!");
+    window.create(sf::VideoMode(width, height), windowName);
     for each (Object* object in gameObjects)
     {
         object->Start(&window);

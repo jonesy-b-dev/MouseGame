@@ -5,6 +5,6 @@ int main()
 {
     EngineCore engine;
 
-    engine.Start();
+    engine.Start("Mouse Game", 1300, 800);
     return 0;
 }

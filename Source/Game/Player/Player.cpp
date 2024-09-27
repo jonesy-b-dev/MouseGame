@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <Time/Time.h>
 
 void Player::Start(sf::RenderWindow* window)
 {
@@ -9,6 +10,7 @@ void Player::Start(sf::RenderWindow* window)
 }
 void Player::Update()
 {
+	HandleInput();
 	Object::Update();
 	//std::cout << "Player update\n";
 }
@@ -16,4 +18,25 @@ void Player::Shutdown()
 {
 	Object::Shutdown();
 	std::cout << "Player shut\n";
+}
+
+
+void Player::HandleInput()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		transform.position.y -= m_speed * Engine::Time::deltaTime;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		transform.position.x -= m_speed * Engine::Time::deltaTime;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		transform.position.y += m_speed * Engine::Time::deltaTime;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		transform.position.x += m_speed * Engine::Time::deltaTime;
+	}
 }

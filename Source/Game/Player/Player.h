@@ -11,4 +11,12 @@ private:
 	void Start(sf::RenderWindow* window) override;
 	void Update() override;
 	void Shutdown() override;
+
+
+	// Gameplay variables
+public:
+private:
+	float m_speed = 140;
+	float m_health = 100;
+	void HandleInput();
 };

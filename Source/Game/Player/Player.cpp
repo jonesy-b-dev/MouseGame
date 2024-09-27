@@ -27,15 +27,15 @@ void Player::HandleInput()
 	{
 		transform.position.y -= m_speed * Engine::Time::deltaTime;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		transform.position.x -= m_speed * Engine::Time::deltaTime;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		transform.position.y += m_speed * Engine::Time::deltaTime;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		transform.position.x += m_speed * Engine::Time::deltaTime;
 	}

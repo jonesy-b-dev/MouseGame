@@ -7,6 +7,8 @@ using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
+    gameObjects.reserve(2);
+    //uiObjects.reserve(2);
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
     Food food(Transform(Vector2(200, 200), 2, Vector2(1, 1)), true);
 

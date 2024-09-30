@@ -1,6 +1,5 @@
 #pragma once
 #include <Object/object.h>
-#include <iostream>
 
 class Player : public Engine::Object
 {
@@ -11,9 +10,10 @@ private:
 	void Start(sf::RenderWindow* window) override;
 	void Update() override;
 	void Shutdown() override;
+	void haha();
 
 
-	// Gameplay variables
+	// Gameplay properties
 public:
 private:
 	bool m_isSafe = true;

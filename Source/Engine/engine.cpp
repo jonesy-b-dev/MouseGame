@@ -1,5 +1,6 @@
 #include "engine.h"
-#include <../Game/Player/Player.h>
+#include "../Game/Player/Player.h"
+#include "../Game/Food/Food.h"
 #include <Time/Time.h>
 
 using namespace Engine;
@@ -7,8 +8,10 @@ using namespace Engine;
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
+    Food food(Transform(Vector2(200, 200), 2, Vector2(1, 1)), true);
 
-    gameObjects.insert(gameObjects.begin(), &player);
+    gameObjects.insert(gameObjects.end(), &food);
+    gameObjects.insert(gameObjects.end(), &player);
 
     window.create(sf::VideoMode(width, height), windowName);
     for each (Object* object in gameObjects)

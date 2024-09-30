@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <Time/Time.h>
+#include <iostream>
 
 void Player::Start(sf::RenderWindow* window)
 {
@@ -19,7 +20,6 @@ void Player::Shutdown()
 	Object::Shutdown();
 	std::cout << "Player shut\n";
 }
-
 
 void Player::HandleInput()
 {

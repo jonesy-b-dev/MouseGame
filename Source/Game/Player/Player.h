@@ -17,10 +17,11 @@ private:
 public:
 private:
 	bool m_isSafe = true;
-	float m_hunger = 100;
+	float m_hunger = 10;
 	float m_speed = 140;
 	float m_health = 100;
-	int m_foodinventory = 0;
+	int m_foodinventory = 10;
+	bool keyEPressed = false;
 	void Death();
 	void Eat();
 	void HandleInput();

@@ -20,6 +20,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     {
         object->Start(&window);
     }
+    objectCount = gameObjects.size();
 
     Update();
 }
@@ -42,6 +43,15 @@ void Engine::EngineCore::Update()
         for each (Object* object in gameObjects)
         {
             object->Update();
+        }
+        // Check if the amount of objects has been changed, if yes make sure they all have the window object
+        if (gameObjects.size() > objectCount)
+        {
+            for each (Object* object in gameObjects)
+            {
+                object->Start(&window);
+                objectCount = gameObjects.size();
+            }
         }
         window.display();
     }

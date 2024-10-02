@@ -15,6 +15,7 @@ namespace Engine
 		sf::RenderWindow window;
 		std::vector<Object*> gameObjects;
 		std::vector<Object*> uiObjects;
+		int objectCount = 0;
 		void Update();
 		void Shutdown();
 	};

@@ -10,6 +10,7 @@ namespace Engine
 		virtual void Start(sf::RenderWindow* window);
 		virtual void Update();
 		virtual void Shutdown();
+		Object() {};
 		Object(Engine::Transform transform, bool hasCollision) : transform(transform),  m_HasCollision(hasCollision){};
 	protected:
 		bool m_HasCollision;
@@ -17,7 +18,6 @@ namespace Engine
 		sf::Texture texture;
 		sf::Sprite sprite;
 		virtual void Collision();
-	private:
 		sf::RenderWindow* m_window;
 	};
 }

@@ -6,6 +6,7 @@ namespace Engine
 	public:
 		float x, y;
 		Vector2(float x, float y) : x(x), y(y) {}
+		Vector2() {};
 		Vector2 Add(Vector2 one, Vector2 two);
 		Vector2 Subtract(Vector2 one, Vector2 two);
 		Vector2 Multiply(Vector2 one, Vector2 two);

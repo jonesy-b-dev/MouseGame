@@ -10,5 +10,6 @@ namespace Engine
 		Vector2 scale;
 
 		Transform(Vector2 position, float rotation, Vector2 scale) : position(position), rotation(rotation), scale(scale) {}
+		Transform() {};
 	};
 }

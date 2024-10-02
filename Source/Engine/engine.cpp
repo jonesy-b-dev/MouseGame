@@ -3,6 +3,7 @@
 #include "../Game/Food/Food.h"
 #include "../Game/FoodSpawner/FoodSpawner.h"
 #include <Time/Time.h>
+#include <iostream>
 
 using namespace Engine;
 
@@ -40,7 +41,16 @@ void Engine::EngineCore::Update()
         Engine::Time::UpdateTime();
 
         window.clear();
-
+        sf::Sprite background;
+        sf::Texture backgroundTex;
+        if (!backgroundTex.loadFromFile("Assets/Background.png"))
+        {
+            std::cout << "nigga";
+        }
+        background.setTexture(backgroundTex);
+        background.setPosition(0, 0);
+        window.draw(background);
+        
         for each (Object* object in gameObjects)
         {
             object->Update();

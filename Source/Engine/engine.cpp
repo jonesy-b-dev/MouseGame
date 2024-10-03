@@ -34,16 +34,21 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     Update();
 }
 
+// Main while loop
 void Engine::EngineCore::Update()
 {
     while (window.isOpen())
     {
-        sf::Event event;
+        // Close when the close event is called
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+                EngineCore::Shutdown();
+            }
         }
+
         // Update the time class
         Engine::Time::UpdateTime();
 
@@ -52,11 +57,15 @@ void Engine::EngineCore::Update()
         // Render background first
         window.draw(m_background);
         
+        // Call update for all the objects in the game (including rendering the items)
         for each (Object* object in gameObjects)
         {
             object->Update();
         }
 
+        // Same for UI
+
+        // Call post update functions here: 
         foodSpawner.PostUpdate();
 
         // Check if the amount of objects has been changed, if yes make sure they all have the window object

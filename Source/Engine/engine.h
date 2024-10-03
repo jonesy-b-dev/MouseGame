@@ -14,8 +14,10 @@ namespace Engine
 		EngineCore() {};
 		void Start(const char* windowName, int width, int height);
 	private:
+        sf::Event event;
 		sf::RenderWindow window;
 		std::vector<Object*> gameObjects;
+		// Seperate list for UI objects so we can render them easily on top of the rest
 		std::vector<Object*> uiObjects;
 		FoodSpawner foodSpawner;
 		sf::Sprite m_background;

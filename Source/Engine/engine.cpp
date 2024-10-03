@@ -1,8 +1,6 @@
 #include "engine.h"
-#include "../Game/Player/Player.h"
-#include "../Game/Food/Food.h"
-#include "../Game/FoodSpawner/FoodSpawner.h"
 #include <Time/Time.h>
+#include "../Game/GameInclude.h"
 #include <iostream>
 
 using namespace Engine;

@@ -34,7 +34,7 @@ void FoodSpawner::SpawnFood()
 {
     m_timeInterval += Engine::Time::deltaTime; 
 
-    if (m_timeInterval > 1)
+    if (m_timeInterval > 4)
     {
         if (Engine::Random::RandomRange(2, 3) == 3)
         {

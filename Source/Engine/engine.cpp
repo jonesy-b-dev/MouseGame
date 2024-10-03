@@ -9,21 +9,36 @@ using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
+    // Reserve space in the vector because we know before how many items it will have initialy
     gameObjects.reserve(2);
-    //uiObjects.reserve(2);
+    uiObjects.reserve(2);
+
+    // Create game objects
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false, gameObjects);
 
+    // Add objects to the object vector
     gameObjects.insert(gameObjects.end(), &foodSpawner);
     gameObjects.insert(gameObjects.end(), &player);
 
+    // Create UI objects
+    UI_PlayerHunger playerHungerBar(Transform(Vector2(20, 20), 0, Vector2(1, 1)), false);
+
+    // Add UI objects to the UI vector
+    uiObjects.insert(uiObjects.end(), &playerHungerBar);
+
     window.create(sf::VideoMode(width, height), windowName);
 
-    for each (Object* object in gameObjects)
+    for each (Object* gameObject in gameObjects)
     {
-        object->Start(&window);
+        gameObject->Start(&window);
     }
     objectCount = gameObjects.size();
+
+    for each (Object* uiObject in uiObjects)
+    {
+        uiObject->Start(&window);
+    }
 
     // Load and set background
     if (!m_backgroundTex.loadFromFile(m_backgroundPath))
@@ -49,7 +64,6 @@ void Engine::EngineCore::Update()
             }
         }
 
-        // Update the time class
         Engine::Time::UpdateTime();
 
         window.clear();
@@ -58,12 +72,16 @@ void Engine::EngineCore::Update()
         window.draw(m_background);
         
         // Call update for all the objects in the game (including rendering the items)
-        for each (Object* object in gameObjects)
+        for each (Object* gameObject in gameObjects)
         {
-            object->Update();
+            gameObject->Update();
         }
 
         // Same for UI
+        for each (Object* uiObject in uiObjects)
+        {
+            uiObject->Update();
+        }
 
         // Call post update functions here: 
         foodSpawner.PostUpdate();
@@ -88,5 +106,10 @@ void Engine::EngineCore::Shutdown()
     for each (Object* object in gameObjects)
     {
         object->Shutdown();
+    }
+
+    for each (Object* uiObject in uiObjects)
+    {
+        uiObject->Shutdown();
     }
 }

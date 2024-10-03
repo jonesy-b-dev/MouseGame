@@ -10,11 +10,8 @@ private:
 	void Start(sf::RenderWindow* window) override;
 	void Update() override;
 	void Shutdown() override;
-	void haha();
-
 
 	// Gameplay properties
-public:
 private:
 	bool m_isSafe = true;
 	float m_hunger = 10;

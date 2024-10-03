@@ -18,12 +18,19 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     gameObjects.insert(gameObjects.end(), &player);
 
     window.create(sf::VideoMode(width, height), windowName);
+
     for each (Object* object in gameObjects)
     {
         object->Start(&window);
     }
     objectCount = gameObjects.size();
 
+    // Load and set background
+    if (!m_backgroundTex.loadFromFile(m_backgroundPath))
+    {
+	    std::cerr << "Failed to load background image\n";
+    }
+    m_background.setTexture(m_backgroundTex);
     Update();
 }
 
@@ -41,15 +48,9 @@ void Engine::EngineCore::Update()
         Engine::Time::UpdateTime();
 
         window.clear();
-        sf::Sprite background;
-        sf::Texture backgroundTex;
-        if (!backgroundTex.loadFromFile("Assets/Background.png"))
-        {
-            std::cout << "nigga";
-        }
-        background.setTexture(backgroundTex);
-        background.setPosition(0, 0);
-        window.draw(background);
+
+        // Render background first
+        window.draw(m_background);
         
         for each (Object* object in gameObjects)
         {

@@ -18,6 +18,9 @@ namespace Engine
 		std::vector<Object*> gameObjects;
 		std::vector<Object*> uiObjects;
 		FoodSpawner foodSpawner;
+		sf::Sprite m_background;
+		sf::Texture m_backgroundTex;
+		const char* m_backgroundPath = "Assets/Background.png";
 		int objectCount = 0;
 
 		void Update();

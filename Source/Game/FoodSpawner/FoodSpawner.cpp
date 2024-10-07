@@ -38,8 +38,10 @@ void FoodSpawner::SpawnFood()
     {
         if (Engine::Random::RandomRange(2, 3) == 3)
         {
-            std::cout << "spawned food\n";
-            m_tempObjectList.insert(m_tempObjectList.end(), new Food(Transform(Vector2(Random::RandomRange(100, 1200), Random::RandomRange(100, 700)), 0, Vector2(0.1, 0.1)), true));
+            //std::cout << "spawned food\n";
+            Food* foodToAdd = new Food(Transform(Vector2(Random::RandomRange(100, 1200), Random::RandomRange(100, 700)), 0, Vector2(0.1, 0.1)), true);
+            m_tempObjectList.insert(m_tempObjectList.end(), foodToAdd);
+            foodToAdd->SetTag("Food");
         }
         m_timeInterval = 0;
     }

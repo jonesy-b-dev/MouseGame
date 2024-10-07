@@ -16,7 +16,7 @@ public:
 private:
 	std::vector<Object*>* m_gameObjectRef;
 	std::vector<Object*> m_tempObjectList;
-	void Start(sf::RenderWindow* window) override;
+	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 	void Update() override;
 	void Shutdown() override;
 

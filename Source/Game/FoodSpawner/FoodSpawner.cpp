@@ -17,7 +17,7 @@ void FoodSpawner::PostUpdate()
     }
 }
 
-void FoodSpawner::Start(sf::RenderWindow* window)
+void FoodSpawner::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
 }
 

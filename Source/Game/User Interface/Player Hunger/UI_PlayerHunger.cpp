@@ -1,9 +1,9 @@
 #include "UI_PlayerHunger.h"
 
-void UI_PlayerHunger::Start(sf::RenderWindow* window)
+void UI_PlayerHunger::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
 	spritePath = "Assets/UI/HungerProgressBar.png";
-	Object::Start(window);
+	Object::Start(window, objectList);
 }
 
 void UI_PlayerHunger::Update()

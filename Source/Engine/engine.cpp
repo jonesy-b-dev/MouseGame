@@ -29,13 +29,13 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
 
     for each (Object* gameObject in gameObjects)
     {
-        gameObject->Start(&window);
+        gameObject->Start(&window, &gameObjects);
     }
     objectCount = gameObjects.size();
 
     for each (Object* uiObject in uiObjects)
     {
-        uiObject->Start(&window);
+        uiObject->Start(&window, &gameObjects);
     }
 
     // Load and set background
@@ -89,7 +89,7 @@ void Engine::EngineCore::Update()
         {
             for each (Object* object in gameObjects)
             {
-                object->Start(&window);
+                object->Start(&window, &gameObjects);
                 objectCount = gameObjects.size();
             }
         }

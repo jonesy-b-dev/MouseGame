@@ -7,7 +7,7 @@ public:
 	Food(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
 
 private:
-	void Start(sf::RenderWindow* window) override;
+	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 	void Update() override;
 	void Shutdown() override;
 

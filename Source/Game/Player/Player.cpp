@@ -2,12 +2,12 @@
 #include <Time/Time.h>
 #include <iostream>
 
-void Player::Start(sf::RenderWindow* window)
+void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
 	// Add spritepath first before we call bassclass start
 	spritePath = "Assets/MainMouse.png";
-	Object::Start(window);
-	std::cout << "Player start\n";
+	Object::Start(window, objectList);
+	//std::cout << "Player start\n";
 }
 void Player::Update()
 {
@@ -18,7 +18,7 @@ void Player::Update()
 void Player::Shutdown()
 {
 	Object::Shutdown();
-	std::cout << "Player shut\n";
+	//std::cout << "Player shut\n";
 }
 
 void Player::Eat()

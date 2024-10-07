@@ -2,9 +2,12 @@
 #include "engine.h"
 #include <iostream>
 
-void Engine::Object::Start(sf::RenderWindow* window)
+void Engine::Object::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
+	// Set references
+	m_gameObjectRef = objectList;
 	m_window = window;
+
 	// Check if a sprite path has been provided if yes load thetexture
 	if (spritePath != NULL)
 	{
@@ -16,7 +19,7 @@ void Engine::Object::Start(sf::RenderWindow* window)
 		sprite.setTexture(texture);
 	}
 	// Otherwise object has no sprite
-	std::cout << "Created object";
+	// std::cout << "Created object";
 }
 
 void Engine::Object::Update()

@@ -7,14 +7,11 @@
 class FoodSpawner : public Engine::Object
 {
 public:
-	//FoodSpawner() {};
-	FoodSpawner() : Object(Engine::Transform(), false), m_gameObjectRef(nullptr) {}
-	FoodSpawner(Engine::Transform transform, bool hasCollision, std::vector<Object*>& gameObjects)
-		: Object(transform, hasCollision), m_gameObjectRef(&gameObjects) {};
+	FoodSpawner() {};
+	FoodSpawner(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
 	void PostUpdate();
 	
 private:
-	std::vector<Object*>* m_gameObjectRef;
 	std::vector<Object*> m_tempObjectList;
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 	void Update() override;

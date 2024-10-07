@@ -13,7 +13,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
 
     // Create game objects
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
-    foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false, gameObjects);
+    foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
 
     // Add objects to the object vector
     gameObjects.insert(gameObjects.end(), &foodSpawner);

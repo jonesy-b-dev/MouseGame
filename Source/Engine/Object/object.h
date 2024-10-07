@@ -6,12 +6,14 @@ namespace Engine
 	class Object
 	{
 	public:
+		Object() {};
+		Object(Engine::Transform transform, bool hasCollision) : transform(transform),  m_HasCollision(hasCollision){};
 		Transform transform;
 		virtual void Start(sf::RenderWindow* window);
 		virtual void Update();
 		virtual void Shutdown();
-		Object() {};
-		Object(Engine::Transform transform, bool hasCollision) : transform(transform),  m_HasCollision(hasCollision){};
+		void SetTag(std::string tagName) { tag = tagName; }
+		
 	protected:
 		bool m_HasCollision;
 		const char* spritePath = NULL;
@@ -19,5 +21,6 @@ namespace Engine
 		sf::Sprite sprite;
 		virtual void Collision();
 		sf::RenderWindow* m_window;
+		std::string tag;
 	};
 }

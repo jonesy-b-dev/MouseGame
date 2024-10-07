@@ -16,6 +16,7 @@ namespace Engine
 		virtual void Update();
 		virtual void Shutdown();
 		void SetTag(std::string tagName) { tag = tagName; }
+		std::string GetTag() { return tag; }
 		
 	protected:
 		bool m_HasCollision;
@@ -25,6 +26,6 @@ namespace Engine
 		sf::RenderWindow* m_window;
 		std::vector<Object*>* m_gameObjectRef;
 		std::string tag;
-		virtual void Collision();
+		virtual void Collision(std::string tagToCompare);
 	};
 }

@@ -36,7 +36,14 @@ void Engine::Object::Shutdown()
 	std::cout << "Shutdown object";
 }
 
-void Engine::Object::Collision()
+void Engine::Object::Collision(std::string tagToCompare)
 {
+	if (m_HasCollision)
+	{
+		for each (Object* gameObject in *m_gameObjectRef)
+		{
+			std::cout << gameObject->GetTag() << std::endl;
+		}
+	}
 	
 }

@@ -12,6 +12,7 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 void Player::Update()
 {
 	HandleInput();
+	Object::Collision("Food");
 	Object::Update();
 	//std::cout << "Player update\n";
 }
@@ -58,7 +59,7 @@ void Player::HandleInput()
 	/// Other inputs
 	// Eat
 	// This can also be done usng Events, but ill need to pass in the whole event object into the player
-	// this is simply easier to do and wont hurt performance anyways. Might change in future when needed.
+	// this is simply easier to do and wont hurt performance anyways. Might change in future when needed since its not really scalable.
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
     {
         if (!keyEPressed)

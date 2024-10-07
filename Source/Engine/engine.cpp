@@ -84,16 +84,6 @@ void Engine::EngineCore::Update()
         // Call post update functions here: 
         foodSpawner.PostUpdate();
 
-        // Check if the amount of objects has been changed, if yes make sure they all have the window object
-        if (gameObjects.size() > objectCount)
-        {
-            for each (Object* object in gameObjects)
-            {
-                object->Start(&window, &gameObjects);
-                objectCount = gameObjects.size();
-            }
-        }
-
         window.display();
     }
     Shutdown();

@@ -5,9 +5,9 @@ class Food : public Engine::Object
 {
 public:
 	Food(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
+	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 
 private:
-	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 	void Update() override;
 	void Shutdown() override;
 

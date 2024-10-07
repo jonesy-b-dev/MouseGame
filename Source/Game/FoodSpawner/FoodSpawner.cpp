@@ -19,6 +19,7 @@ void FoodSpawner::PostUpdate()
 
 void FoodSpawner::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
+    Object::Start(window, objectList);
 }
 
 void FoodSpawner::Update()
@@ -41,6 +42,7 @@ void FoodSpawner::SpawnFood()
             //std::cout << "spawned food\n";
             Food* foodToAdd = new Food(Transform(Vector2(Random::RandomRange(100, 1200), Random::RandomRange(100, 700)), 0, Vector2(0.1, 0.1)), true);
             m_tempObjectList.insert(m_tempObjectList.end(), foodToAdd);
+            foodToAdd->Start(m_window, m_gameObjectRef);
             foodToAdd->SetTag("Food");
         }
         m_timeInterval = 0;

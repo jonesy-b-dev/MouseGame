@@ -36,14 +36,19 @@ void Engine::Object::Shutdown()
 	std::cout << "Shutdown object";
 }
 
-void Engine::Object::Collision(std::string tagToCompare)
+bool Engine::Object::Collision(std::string tagToCompare)
 {
-	if (m_HasCollision)
+	// Instantly return when object doesnt have collision
+	if (!m_HasCollision) return false;
+	for each (Object* gameObject in *m_gameObjectRef)
 	{
-		for each (Object* gameObject in *m_gameObjectRef)
+		if (gameObject->GetTag() == tagToCompare)
 		{
-			std::cout << gameObject->GetTag() << std::endl;
+			if (sprite.getGlobalBounds().intersects(gameObject->sprite.getGlobalBounds()))
+			{
+				return true;
+			}
 		}
 	}
-	
+	return false;
 }

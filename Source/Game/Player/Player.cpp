@@ -5,6 +5,7 @@
 void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
 	// Add spritepath first before we call bassclass start
+	SetTag("Mouse");
 	spritePath = "Assets/MainMouse.png";
 	Object::Start(window, objectList);
 	//std::cout << "Player start\n";
@@ -12,7 +13,10 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 void Player::Update()
 {
 	HandleInput();
-	Object::Collision("Food");
+	if (Object::CollidesWith("Food"))
+	{
+		std::cout << "Collide";
+	}
 	Object::Update();
 	//std::cout << "Player update\n";
 }

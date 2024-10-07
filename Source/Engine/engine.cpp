@@ -7,7 +7,7 @@ using namespace Engine;
 
 void Engine::EngineCore::Start(const char* windowName, int width, int height)
 {
-    // Reserve space in the vector because we know before how many items it will have initialy
+    // Reserve space in the vectors because we know before how many items it will have initialy
     gameObjects.reserve(2);
     uiObjects.reserve(2);
 

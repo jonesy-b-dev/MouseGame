@@ -23,7 +23,8 @@ The object class will have the following properties:
 * Update();
 * Shutdown();
 * HasCollision bool (Would be false for ui/audio)
-* Collision functionality
+* Tag std::string
+* CollidesWith(std::string tagToCompare)
 
 The Transform is a custom struct we implement with the following properties:
 * Vector2 position;
@@ -84,5 +85,13 @@ Properties:
 ## UI : object
 All ui is implemented as an object and is just a sprite rendered after everything of the game is rendered. Has no collision. The UI objects are stored in another vector of objects but works the same as the normal objects but is looped over after the normak game objects.
 
+## Collision
+In the object system we have a tag const char* in the base object class. in the `CollidesWith()` function that takes in a `std::string tagToCompare` we first check if the object has collision with the hasCollision bool. 
+Then we loop over all the objects in the scene and check what the tag is and compare it to the tagToCompare param. 
+If it has the tag we check if the bounds intersect with `sprite.getGlobalBounds().intersects(sprite2)`
 ## Audio
 Audio is implemented right in the object where it needs to be played. No special class needed for this.
+
+
+## Updates
+07/10/2024: Added Collision section with details on how to implement collision system.

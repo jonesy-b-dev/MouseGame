@@ -19,7 +19,7 @@ private:
 	// Current speed wil vary from value, default always stays the same
 	float m_currentSpeed = 140;
 	float m_defaultSpeed = 140;
-	float m_reductionValue = 0.95;
+	float m_reductionValue = 0.90; // With how much the speed is going to get multiplied for each item in the inventory
 	float m_health = 100;
 	int m_foodinventory = 0;
 	bool keyEPressed = false;

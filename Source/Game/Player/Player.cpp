@@ -52,18 +52,22 @@ void Player::HandleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		transform.position.y -= m_currentSpeed * Engine::Time::deltaTime;
+		transform.rotation = 270;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		transform.position.x -= m_currentSpeed * Engine::Time::deltaTime;
+		transform.rotation = 180;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		transform.position.y += m_currentSpeed * Engine::Time::deltaTime;
+		transform.rotation = 90;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		transform.position.x += m_currentSpeed * Engine::Time::deltaTime;
+		transform.rotation = 0;
 	}
 
 	/// Other inputs

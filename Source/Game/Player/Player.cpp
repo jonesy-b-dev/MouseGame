@@ -17,6 +17,7 @@ void Player::Update()
 	if (collidedObject != false)
 	{
 		std::cout << "Collide" << std::endl;
+		collidedObject->deletionMark = true;
 	}
 
 	Object::Update();

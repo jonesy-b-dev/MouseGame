@@ -19,6 +19,10 @@ namespace Engine
 		std::vector<Object*> gameObjects;
 		// Seperate list for UI objects so we can render them easily on top of the rest
 		std::vector<Object*> uiObjects;
+
+		// Vector that holds the objects that need to be removed form the game
+		std::vector<Object*> toRemoveObjects;
+
 		FoodSpawner foodSpawner;
 		sf::Sprite m_background;
 		sf::Texture m_backgroundTex;

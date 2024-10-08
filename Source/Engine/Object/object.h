@@ -17,6 +17,9 @@ namespace Engine
 		virtual void Shutdown();
 		void SetTag(std::string tagName) { tag = tagName; }
 		std::string GetTag() { return tag; }
+		// When this is set to true the object will be removed when the frame is finished
+		bool deletionMark = false;
+
 		
 	protected:
 		bool m_HasCollision;

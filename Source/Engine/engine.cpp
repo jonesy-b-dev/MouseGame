@@ -1,5 +1,6 @@
 #include "engine.h"
 #include <Time/Time.h>
+#include <algorithm>
 #include "../Game/GameInclude.h"
 #include <iostream>
 
@@ -73,6 +74,10 @@ void Engine::EngineCore::Update()
         for each (Object* gameObject in gameObjects)
         {
             gameObject->Update();
+            if (gameObject->deletionMark)
+            {
+                toRemoveObjects.push_back(gameObject);
+            }
         }
 
         // Same for UI
@@ -83,6 +88,17 @@ void Engine::EngineCore::Update()
 
         // Call post update functions here: 
         foodSpawner.PostUpdate();
+
+
+        // Remove all objects from the list that have been marked for removal
+        for each (Object* removedObject in toRemoveObjects)
+        {
+            auto it = std::find(gameObjects.begin(), gameObjects.end(), removedObject);
+            gameObjects.erase(it);
+        }
+
+        // Clear the vector of removed items
+        toRemoveObjects.clear();
 
         window.display();
     }

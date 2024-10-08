@@ -20,6 +20,10 @@ void Engine::Object::Start(sf::RenderWindow* window, std::vector<Object*>* objec
 	}
 	// Otherwise object has no sprite
 	// std::cout << "Created object";
+
+	// Set the origin to the center of the sprite
+	sf::Vector2u textureSize = texture.getSize();
+    sprite.setOrigin(textureSize.x / 2.0f, textureSize.y / 2.0f);
 }
 
 void Engine::Object::Update()

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <math.h>
 #include <Time/Time.h>
 #include <iostream>
 
@@ -12,11 +13,13 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 }
 void Player::Update()
 {
+	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));
 	HandleInput();
 	Object* collidedObject = Object::CollidesWith("Food");
 	if (collidedObject != false)
 	{
 		std::cout << "Collide" << std::endl;
+		m_foodinventory++;
 		collidedObject->deletionMark = true;
 	}
 
@@ -48,19 +51,19 @@ void Player::HandleInput()
 	// Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		transform.position.y -= m_speed * Engine::Time::deltaTime;
+		transform.position.y -= m_currentSpeed * Engine::Time::deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		transform.position.x -= m_speed * Engine::Time::deltaTime;
+		transform.position.x -= m_currentSpeed * Engine::Time::deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		transform.position.y += m_speed * Engine::Time::deltaTime;
+		transform.position.y += m_currentSpeed * Engine::Time::deltaTime;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		transform.position.x += m_speed * Engine::Time::deltaTime;
+		transform.position.x += m_currentSpeed * Engine::Time::deltaTime;
 	}
 
 	/// Other inputs

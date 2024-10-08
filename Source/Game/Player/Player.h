@@ -15,9 +15,13 @@ private:
 private:
 	bool m_isSafe = true;
 	float m_hunger = 10;
-	float m_speed = 140;
+
+	// Current speed wil vary from value, default always stays the same
+	float m_currentSpeed = 140;
+	float m_defaultSpeed = 140;
+	float m_reductionValue = 0.95;
 	float m_health = 100;
-	int m_foodinventory = 10;
+	int m_foodinventory = 0;
 	bool keyEPressed = false;
 	void Death();
 	void Eat();

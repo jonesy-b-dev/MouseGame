@@ -95,6 +95,7 @@ void Engine::EngineCore::Update()
         {
             auto it = std::find(gameObjects.begin(), gameObjects.end(), removedObject);
             gameObjects.erase(it);
+            delete removedObject;
         }
 
         // Clear the vector of removed items

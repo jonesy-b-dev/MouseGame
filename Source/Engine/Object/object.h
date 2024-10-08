@@ -26,6 +26,6 @@ namespace Engine
 		sf::RenderWindow* m_window;
 		std::vector<Object*>* m_gameObjectRef;
 		std::string tag;
-		virtual bool CollidesWith(std::string tagToCompare);
+		virtual Engine::Object* CollidesWith(std::string tagToCompare);
 	};
 }

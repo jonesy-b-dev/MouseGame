@@ -13,10 +13,12 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 void Player::Update()
 {
 	HandleInput();
-	if (Object::CollidesWith("Food"))
+	Object* collidedObject = Object::CollidesWith("Food");
+	if (collidedObject != false)
 	{
-		std::cout << "Collide";
+		std::cout << "Collide" << std::endl;
 	}
+
 	Object::Update();
 	//std::cout << "Player update\n";
 }

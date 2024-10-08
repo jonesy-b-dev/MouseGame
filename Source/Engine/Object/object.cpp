@@ -36,7 +36,7 @@ void Engine::Object::Shutdown()
 	std::cout << "Shutdown object";
 }
 
-bool Engine::Object::CollidesWith(std::string tagToCompare)
+Engine::Object* Engine::Object::CollidesWith(std::string tagToCompare)
 {
 	// Instantly return when object doesnt have collision
 	if (!m_HasCollision) return false;
@@ -46,7 +46,7 @@ bool Engine::Object::CollidesWith(std::string tagToCompare)
 		{
 			if (sprite.getGlobalBounds().intersects(gameObject->sprite.getGlobalBounds()))
 			{
-				return true;
+				return gameObject;
 			}
 		}
 	}

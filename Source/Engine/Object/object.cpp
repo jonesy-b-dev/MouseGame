@@ -36,7 +36,7 @@ void Engine::Object::Shutdown()
 	std::cout << "Shutdown object";
 }
 
-bool Engine::Object::Collision(std::string tagToCompare)
+bool Engine::Object::CollidesWith(std::string tagToCompare)
 {
 	// Instantly return when object doesnt have collision
 	if (!m_HasCollision) return false;

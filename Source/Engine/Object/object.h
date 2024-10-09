@@ -11,6 +11,7 @@ namespace Engine
 	public:
 		Object() {};
 		Object(Engine::Transform transform, bool hasCollision) : transform(transform),  m_HasCollision(hasCollision){};
+		Object(Engine::Transform transform, bool hasCollision, const char* spritePath) : transform(transform),  m_HasCollision(hasCollision), spritePath(spritePath) {};
 		Transform transform;
 		virtual void Start(sf::RenderWindow* window, std::vector<Object*>* objectList);
 		virtual void Update();

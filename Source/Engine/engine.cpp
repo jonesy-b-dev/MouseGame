@@ -21,7 +21,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     gameObjects.insert(gameObjects.end(), &player);
 
     // Create UI objects
-    UI_PlayerHunger playerHungerBar(Transform(Vector2(20, 20), 0, Vector2(1, 1)), false);
+    UIElement playerHungerBar(Transform(Vector2(20, 20), 0, Vector2(1, 1)), false);
 
     // Add UI objects to the UI vector
     uiObjects.insert(uiObjects.end(), &playerHungerBar);

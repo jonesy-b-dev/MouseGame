@@ -3,7 +3,8 @@
 class UIElement : public Engine::Object 
 {
 public:
-	UIElement(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
+	UIElement() {};
+	UIElement(Engine::Transform transform, bool hasCollision, const char* spritePath) : Object(transform, hasCollision, spritePath) {};
 private:
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
 	void Update() override;

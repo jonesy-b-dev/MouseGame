@@ -1,10 +1,11 @@
 #pragma once
 #include <Object/object.h>
+#include "../User Interface/UIElement.h"
 
 class Player : public Engine::Object
 {
 public:
-	Player(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
+	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar) : Object(transform, hasCollision), m_HungerbarRef(hungerBar) {};
 
 private:
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
@@ -15,6 +16,7 @@ private:
 private:
 	bool m_isSafe = true;
 	float m_hunger = 10;
+	UIElement* m_HungerbarRef;
 
 	// Current speed wil vary from value, default always stays the same
 	float m_currentSpeed = 140;

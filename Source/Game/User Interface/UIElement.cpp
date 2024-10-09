@@ -2,8 +2,8 @@
 
 void UIElement::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
-	spritePath = "Assets/UI/HungerProgressBar.png";
 	Object::Start(window, objectList);
+	sprite.setOrigin(0, 0);
 }
 
 void UIElement::Update()

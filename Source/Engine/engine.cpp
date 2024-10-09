@@ -1,7 +1,6 @@
 #include "engine.h"
 #include <Time/Time.h>
 #include <algorithm>
-#include "../Game/GameInclude.h"
 #include <iostream>
 
 using namespace Engine;
@@ -13,7 +12,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     uiObjects.reserve(2);
 
     // Create game objects
-    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true);
+    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
 
     // Add objects to the object vector
@@ -21,9 +20,11 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     gameObjects.insert(gameObjects.end(), &player);
 
     // Create UI objects
-    UIElement playerHungerBar(Transform(Vector2(20, 20), 0, Vector2(1, 1)), false);
+    UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png");
+    playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png");
 
     // Add UI objects to the UI vector
+    uiObjects.insert(uiObjects.end(), &playerHungerBarBG);
     uiObjects.insert(uiObjects.end(), &playerHungerBar);
 
     window.create(sf::VideoMode(width, height), windowName);

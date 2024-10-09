@@ -5,6 +5,7 @@
 #include <Transform/Transform.h>
 #include "../Game/FoodSpawner/FoodSpawner.h"
 #include <Vector2/Vector2.h>
+#include "../Game/GameInclude.h"
 
 namespace Engine
 {
@@ -23,11 +24,15 @@ namespace Engine
 		// Vector that holds the objects that need to be removed form the game
 		std::vector<Object*> toRemoveObjects;
 
-		FoodSpawner foodSpawner;
 		sf::Sprite m_background;
 		sf::Texture m_backgroundTex;
 		const char* m_backgroundPath = "Assets/Background.png";
 		int objectCount = 0;
+
+
+		// Objects placed here need to be passed to other classes, so definitions are here
+		UIElement playerHungerBar;
+		FoodSpawner foodSpawner;
 
 		void Update();
 		void Shutdown();

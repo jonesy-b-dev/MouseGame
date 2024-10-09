@@ -22,6 +22,7 @@ void Player::Update()
 		m_foodinventory++;
 		collidedObject->deletionMark = true;
 	}
+	m_HungerbarRef->transform.scale.x = m_hunger / 100;
 
 	Object::Update();
 	//std::cout << "Player update\n";

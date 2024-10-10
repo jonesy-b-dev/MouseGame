@@ -30,6 +30,8 @@ namespace Engine
 		sf::RenderWindow* m_window;
 		std::vector<Object*>* m_gameObjectRef;
 		std::string tag;
+
 		virtual Engine::Object* CollidesWith(std::string tagToCompare);
+		void UpdateTexture(const char* pathToNewTexture);
 	};
 }

@@ -56,3 +56,16 @@ Engine::Object* Engine::Object::CollidesWith(std::string tagToCompare)
 	}
 	return false;
 }
+
+void Engine::Object::UpdateTexture(const char* pathToNewTexture)
+{
+	if (pathToNewTexture != NULL)
+	{
+		if (!texture.loadFromFile(pathToNewTexture))
+		{
+			std::cerr << "Failed to load image\n";
+			return;
+		}
+		sprite.setTexture(texture);
+	}
+}

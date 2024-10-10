@@ -33,6 +33,7 @@ namespace Engine
 
 
 		// Objects placed here need to be passed to other classes, so definitions are here
+		UIElement playerHungerBarText;
 		UIElement playerHungerBar;
 		FoodSpawner foodSpawner;
 

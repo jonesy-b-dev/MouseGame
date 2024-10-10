@@ -25,10 +25,13 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     // Create UI objects
     UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
+    playerHungerBarText = UIElement(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    playerHungerBarText.SetText("Hunger");
 
     // Add UI objects to the UI vector
     uiObjects.insert(uiObjects.end(), &playerHungerBarBG);
     uiObjects.insert(uiObjects.end(), &playerHungerBar);
+    uiObjects.insert(uiObjects.end(), &playerHungerBarText);
 
     window.create(sf::VideoMode(width, height), windowName);
 

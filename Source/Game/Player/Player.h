@@ -28,7 +28,7 @@ private:
 	int m_foodinventory = 0;
 	bool m_keyEPressed = false;
 	float m_hungerTimer = 0;
-	float m_hungerSpeed = 0.1; // Amount of seconds hunger will go down by 1
+	float m_hungerSpeed = 0.5; // Amount of seconds hunger will go down by 1
 
 	void Death();
 	void Eat();

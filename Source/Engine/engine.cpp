@@ -5,8 +5,11 @@
 
 using namespace Engine;
 
-void Engine::EngineCore::Start(const char* windowName, int width, int height)
+void Engine::EngineCore::Start(const char* windowName, int width, int height, const char* defaultFontPath)
 {
+    // Load font
+    if (!m_defaultFont.loadFromFile(defaultFontPath)) std::cerr << "Failed to load font\n";
+
     // Reserve space in the vectors because we know before how many items it will have initialy
     gameObjects.reserve(2);
     uiObjects.reserve(2);
@@ -20,8 +23,8 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height)
     gameObjects.insert(gameObjects.end(), &player);
 
     // Create UI objects
-    UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png");
-    playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png");
+    UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
+    playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
 
     // Add UI objects to the UI vector
     uiObjects.insert(uiObjects.end(), &playerHungerBarBG);

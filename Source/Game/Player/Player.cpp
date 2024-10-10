@@ -13,6 +13,8 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 }
 void Player::Update()
 {
+	Object::Update();
+	if (m_isDead) return;
 	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));
 	HandleInput();
 	Object* collidedObject = Object::CollidesWith("Food");
@@ -24,7 +26,6 @@ void Player::Update()
 	}
 	UpdateHunger();
 
-	Object::Update();
 	//std::cout << "Player update\n";
 }
 void Player::Shutdown()
@@ -35,8 +36,11 @@ void Player::Shutdown()
 
 void Player::Death()
 {
+	UpdateTexture("Assets/MainMouseDead.png");
 	m_isDead = true;
+	std::cout << "Player died\n";
 }
+
 void Player::Eat()
 {
 	if (m_foodinventory != 0)

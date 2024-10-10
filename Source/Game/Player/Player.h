@@ -22,7 +22,9 @@ private:
 	float m_currentSpeed = 140;
 	float m_defaultSpeed = 140;
 	float m_reductionValue = 0.90; // With how much the speed is going to get multiplied for each item in the inventory
+
 	float m_health = 100;
+	bool m_isDead = false;
 	int m_foodinventory = 0;
 	bool m_keyEPressed = false;
 	float m_hungerTimer = 0;

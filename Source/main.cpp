@@ -5,6 +5,7 @@ int main()
 {
     EngineCore engine;
 
-    engine.Start("Mouse Game", 1300, 800);
+    engine.Start("Mouse Game", 1300, 800, "Assets/Fonts/Hey Comic.ttf");
+
     return 0;
 }

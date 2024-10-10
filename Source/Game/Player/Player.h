@@ -15,7 +15,7 @@ private:
 	// Gameplay properties
 private:
 	bool m_isSafe = true;
-	float m_hunger = 10;
+	float m_hunger = 100;
 	UIElement* m_HungerbarRef;
 
 	// Current speed wil vary from value, default always stays the same
@@ -24,8 +24,12 @@ private:
 	float m_reductionValue = 0.90; // With how much the speed is going to get multiplied for each item in the inventory
 	float m_health = 100;
 	int m_foodinventory = 0;
-	bool keyEPressed = false;
+	bool m_keyEPressed = false;
+	float m_hungerTimer = 0;
+	float m_hungerSpeed = 0.1; // Amount of seconds hunger will go down by 1
+
 	void Death();
 	void Eat();
+	void UpdateHunger();
 	void HandleInput();
 };

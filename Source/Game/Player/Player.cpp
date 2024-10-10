@@ -22,7 +22,7 @@ void Player::Update()
 		m_foodinventory++;
 		collidedObject->deletionMark = true;
 	}
-	m_HungerbarRef->transform.scale.x = m_hunger / 100;
+	UpdateHunger();
 
 	Object::Update();
 	//std::cout << "Player update\n";
@@ -33,6 +33,10 @@ void Player::Shutdown()
 	//std::cout << "Player shut\n";
 }
 
+void Player::Death()
+{
+	m_isDead = true;
+}
 void Player::Eat()
 {
 	if (m_foodinventory != 0)
@@ -45,6 +49,21 @@ void Player::Eat()
 		}
 	}
 	std::cout << m_hunger << " inv:" << m_foodinventory << "\n";
+}
+
+void Player::UpdateHunger()
+{
+	m_hungerTimer += Engine::Time::deltaTime;
+	if (m_hungerTimer >= m_hungerSpeed)
+	{
+		m_hunger--;
+		m_hungerTimer = 0;
+		if (m_hunger == 0)
+		{
+			Death();
+		}
+	}
+	m_HungerbarRef->transform.scale.x = m_hunger / 100;
 }
 
 void Player::HandleInput()
@@ -77,11 +96,11 @@ void Player::HandleInput()
 	// this is simply easier to do and wont hurt performance anyways. Might change in future when needed since its not really scalable.
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
     {
-        if (!keyEPressed)
+        if (!m_keyEPressed)
         {
             Eat();
-            keyEPressed = true;  // Mark key as pressed
+            m_keyEPressed = true;  // Mark key as pressed
         }
     }
-    else keyEPressed = false;  // Reset when the key is released
+    else m_keyEPressed = false;  // Reset when the key is released
 }

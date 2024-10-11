@@ -36,6 +36,7 @@ namespace Engine
 		UIElement playerHungerBarText;
 		UIElement playerHungerBar;
 		FoodSpawner foodSpawner;
+		EnemySpawner enemySpawner;
 
 		void Update();
 		void Shutdown();

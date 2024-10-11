@@ -11,16 +11,18 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     if (!m_defaultFont.loadFromFile(defaultFontPath)) std::cerr << "Failed to load font\n";
 
     // Reserve space in the vectors because we know before how many items it will have initialy
-    gameObjects.reserve(2);
-    uiObjects.reserve(2);
+    gameObjects.reserve(3);
+    uiObjects.reserve(3);
 
     // Create game objects
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
+    enemySpawner = EnemySpawner(Transform(Vector2(100, 100), 0, Vector2(1, 1)), true);
 
     // Add objects to the object vector
     gameObjects.insert(gameObjects.end(), &foodSpawner);
     gameObjects.insert(gameObjects.end(), &player);
+    gameObjects.insert(gameObjects.end(), &enemySpawner);
 
     // Create UI objects
     UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
@@ -95,6 +97,7 @@ void Engine::EngineCore::Update()
 
         // Call post update functions here: 
         foodSpawner.PostUpdate();
+        enemySpawner.PostUpdate();
 
 
         // Remove all objects from the list that have been marked for removal

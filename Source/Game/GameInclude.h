@@ -4,3 +4,4 @@
 #include "Food/Food.h"
 #include "FoodSpawner/FoodSpawner.h"
 #include "User Interface/UIElement.h"
+#include "EnemySpawner/EnemySpawner.h"

@@ -33,7 +33,7 @@ void EnemySpawner::SpawnEnemy()
 {
     m_timeInterval += Engine::Time::deltaTime; 
 
-    if (m_timeInterval > 0.3)
+    if (m_timeInterval > 3.5)
     {
         if (Engine::Random::RandomRange(2, 3) == 3)
         {

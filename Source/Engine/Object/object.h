@@ -3,6 +3,7 @@
 #include <vector>
 #include "../Transform/Transform.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 namespace Engine
 {
@@ -30,6 +31,7 @@ namespace Engine
 		sf::RenderWindow* m_window;
 		std::vector<Object*>* m_gameObjectRef;
 		std::string tag;
+		//sf::SoundBuffer m_soundBuffer;
 
 		virtual Engine::Object* CollidesWith(std::string tagToCompare);
 		void UpdateTexture(const char* pathToNewTexture);

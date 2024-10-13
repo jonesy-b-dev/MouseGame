@@ -8,6 +8,13 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 	// Add spritepath first before we call bassclass start
 	SetTag("Mouse");
 	spritePath = "Assets/MainMouse.png";
+
+//	if (!m_soundBuffer.loadFromFile("Assets/Audio/PickupFood.ogg"))
+	//{
+		//std::cerr << "Failed to load audio file of player\n";
+	//}
+	//m_pickUpSound.setBuffer(m_soundBuffer);
+
 	Object::Start(window, objectList);
 	//std::cout << "Player start\n";
 }
@@ -25,6 +32,7 @@ void Player::Update()
 	Object* foodObj = Object::CollidesWith("Food");
 	if (foodObj != false)
 	{
+		//m_pickUpSound.play();
 		std::cout << "Collide" << std::endl;
 		m_foodinventory++;
 		foodObj->deletionMark = true;

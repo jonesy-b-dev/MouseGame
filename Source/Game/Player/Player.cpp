@@ -13,18 +13,39 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 }
 void Player::Update()
 {
+	// Always render the object
 	Object::Update();
+
 	if (m_isDead) return;
+	// Only execute when player alive
 	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));
 	HandleInput();
-	Object* collidedObject = Object::CollidesWith("Food");
-	if (collidedObject != false)
+
+	// Collision
+	Object* foodObj = Object::CollidesWith("Food");
+	if (foodObj != false)
 	{
 		std::cout << "Collide" << std::endl;
 		m_foodinventory++;
-		collidedObject->deletionMark = true;
+		foodObj->deletionMark = true;
 	}
+	Object* enemyObj = Object::CollidesWith("Enemy");
+	if (enemyObj != false)
+	{
+		if (!m_isCollidingWithEnemy)
+		{
+			m_isCollidingWithEnemy = true;
+			std::cout << "Collide enemy" << std::endl;
+			m_health -= 20;
+		}
+	}
+	else { m_isCollidingWithEnemy = false; }
+
 	UpdateHunger();
+	// Update health bar UI
+	m_HealthBarRef->transform.scale.x = m_health / 100;
+
+	if (m_health <= 0) Death();
 
 	//std::cout << "Player update\n";
 }

@@ -15,7 +15,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     uiObjects.reserve(3);
 
     // Create game objects
-    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar);
+    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
     enemySpawner = EnemySpawner(Transform(Vector2(100, 100), 0, Vector2(1, 1)), true);
 
@@ -25,16 +25,33 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     gameObjects.insert(gameObjects.end(), &enemySpawner);
 
     // Create UI objects
+
+    // Hunger
     UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
     playerHungerBarText = UIElement(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
     playerHungerBarText.SetText("Hunger");
 
+
+    // Health
+    UIElement playerHealthBarBG(Transform(Vector2(200, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
+    playerHealthBar = UIElement(Transform(Vector2(205, 15), 0, Vector2(1, 1)), false, "Assets/UI/HealthProgressBar.png", &m_defaultFont);
+    playerHealthBarText = UIElement(Transform(Vector2(245, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    playerHealthBarText.SetText("Health");
+
+
     // Add UI objects to the UI vector
+    // Hunger
     uiObjects.insert(uiObjects.end(), &playerHungerBarBG);
     uiObjects.insert(uiObjects.end(), &playerHungerBar);
     uiObjects.insert(uiObjects.end(), &playerHungerBarText);
 
+    // Health
+    uiObjects.insert(uiObjects.end(), &playerHealthBarBG);
+    uiObjects.insert(uiObjects.end(), &playerHealthBar);
+    uiObjects.insert(uiObjects.end(), &playerHealthBarText);
+    
+    // Create the window
     window.create(sf::VideoMode(width, height), windowName);
 
     for each (Object* gameObject in gameObjects)

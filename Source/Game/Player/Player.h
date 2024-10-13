@@ -5,7 +5,10 @@
 class Player : public Engine::Object
 {
 public:
-	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar) : Object(transform, hasCollision), m_HungerbarRef(hungerBar) {};
+	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar, UIElement* healthBar)
+		: Object(transform, hasCollision), 
+		m_HungerbarRef(hungerBar), 
+		m_HealthBarRef(healthBar) {};
 
 private:
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
@@ -17,6 +20,7 @@ private:
 	bool m_isSafe = true;
 	float m_hunger = 100;
 	UIElement* m_HungerbarRef;
+	UIElement* m_HealthBarRef;
 
 	// Current speed wil vary from value, default always stays the same
 	float m_currentSpeed = 140;
@@ -24,6 +28,7 @@ private:
 	float m_reductionValue = 0.90; // With how much the speed is going to get multiplied for each item in the inventory
 
 	float m_health = 100;
+	bool m_isCollidingWithEnemy = false;
 	bool m_isDead = false;
 	int m_foodinventory = 0;
 	bool m_keyEPressed = false;

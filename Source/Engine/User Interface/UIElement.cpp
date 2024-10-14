@@ -1,4 +1,5 @@
 #include "UIElement.h"
+using namespace Engine;
 
 void UIElement::SetText(std::string text)
 {

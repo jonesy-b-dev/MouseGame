@@ -1,6 +1,7 @@
 #pragma once
 #include <Object/object.h>
-#include "../User Interface/UIElement.h"
+#include <User Interface/UIElement.h>
+using namespace Engine;
 
 class Player : public Engine::Object
 {

@@ -31,7 +31,7 @@ namespace Engine
 		sf::RenderWindow* m_window;
 		std::vector<Object*>* m_gameObjectRef;
 		std::string tag;
-		//sf::SoundBuffer m_soundBuffer;
+		sf::SoundBuffer m_soundBuffer;
 
 		virtual Engine::Object* CollidesWith(std::string tagToCompare);
 		void UpdateTexture(const char* pathToNewTexture);

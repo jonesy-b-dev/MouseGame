@@ -37,7 +37,7 @@ private:
 	float m_hungerSpeed = 0.5; // Amount of seconds hunger will go down by 1
 
 	// Audio
-	//sf::Sound m_pickUpSound;
+	sf::Sound m_pickUpSound;
 
 	void Death();
 	void Eat();

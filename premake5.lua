@@ -58,6 +58,9 @@ project "MouseGame"
             "sfml-system-s-d.lib",
             "sfml-window-s-d.lib" 
         }
+        postbuildcommands {
+           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
+        }
 
     filter "configurations:Release"
         defines { "RELEASE", "ST_PLATFORM_WINDOWS" }
@@ -72,6 +75,10 @@ project "MouseGame"
             "sfml-system-s.lib",
             "sfml-window-s.lib" 
         }
+        postbuildcommands {
+           '{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
+        }
 
     filter "configurations:Dist"
         defines { "DIST", "ST_PLATFORM_WINDOWS" }
@@ -84,4 +91,8 @@ project "MouseGame"
             "sfml-network-s.lib",
             "sfml-system-s.lib",
             "sfml-window-s.lib" 
+        }
+        postbuildcommands {
+           '{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
         }

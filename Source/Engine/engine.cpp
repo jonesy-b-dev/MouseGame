@@ -27,9 +27,9 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     // Create UI objects
 
     // Hunger
-    UIElement playerHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
-    playerHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
-    playerHungerBarText = UIElement(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    UIElement playerHungerBarBG(Transform(Vector2(1119, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
+    playerHungerBar = UIElement(Transform(Vector2(1124, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
+    UIElement playerHungerBarText(Transform(Vector2(1164, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
     playerHungerBarText.SetText("Hunger");
 
 

@@ -77,10 +77,13 @@ Properties:
 * MoveToPosition
 * TakeDamage(int damage)
 
-## House : object 
-The house is places on the left side of the screen and has a diffrent kind of collision and acts more as a trigger, when the player enters the house all food items will be removed and for every food item delivered the house hunger goes up by 5%. When the house hunger reaches 0 we call the Death funciton in the player(The same happens when the player days so we can use this funciton)
+## Family : object 
+The family is places on the left side of the screen and has a invisible texture to define a area to collide with, when the player enters the trigger the `Deliver()` function is called in the Family script.
+All food items will be removed and for every food item delivered the house hunger goes up by 5%. 
+When the house hunger reaches 0 we call the Death funciton in the player(The same happens when the player dies so we can use this funciton)
 Properties:
 * float hunger;
+* DeliverItems(int amount)
 
 ## UI : object
 All ui is implemented as an object and is just a sprite rendered after everything of the game is rendered. Has no collision. The UI objects are stored in another vector of objects but works the same as the normal objects but is looped over after the normak game objects.
@@ -88,10 +91,11 @@ All ui is implemented as an object and is just a sprite rendered after everythin
 ## Collision
 In the object system we have a tag const char* in the base object class. in the `CollidesWith()` function that takes in a `std::string tagToCompare` we first check if the object has collision with the hasCollision bool. 
 Then we loop over all the objects in the scene and check what the tag is and compare it to the tagToCompare param. 
-If it has the tag we check if the bounds intersect with `sprite.getGlobalBounds().intersects(sprite2)`
-## Audio
-Audio is implemented right in the object where it needs to be played. No special class needed for this.
+If it has the tag we check if the bounds intersect with `sprite.getGlobalBounds().intersects(sprite2)`.
+Then we return the gameObject so we can do stuff with that from where we checked for collision.
 
+## Audio
+There is a soundBuffer object in the object class to load audio in, subclasses can create sound objects and load in the buffer to call a audio sample.
 
 ## Updates
 07/10/2024: Added Collision section with details on how to implement collision system.

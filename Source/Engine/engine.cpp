@@ -11,8 +11,8 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     if (!m_defaultFont.loadFromFile(defaultFontPath)) std::cerr << "Failed to load font\n";
 
     // Reserve space in the vectors because we know before how many items it will have initialy
-    gameObjects.reserve(3);
-    uiObjects.reserve(3);
+    gameObjects.reserve(4);
+    uiObjects.reserve(6);
 
     // Create game objects
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar);
@@ -34,10 +34,16 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
 
 
     // Health
-    UIElement playerHealthBarBG(Transform(Vector2(200, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
-    playerHealthBar = UIElement(Transform(Vector2(205, 15), 0, Vector2(1, 1)), false, "Assets/UI/HealthProgressBar.png", &m_defaultFont);
-    playerHealthBarText = UIElement(Transform(Vector2(245, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    UIElement playerHealthBarBG(Transform(Vector2(939, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
+    playerHealthBar = UIElement(Transform(Vector2(944, 15), 0, Vector2(1, 1)), false, "Assets/UI/HealthProgressBar.png", &m_defaultFont);
+    playerHealthBarText = UIElement(Transform(Vector2(984, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
     playerHealthBarText.SetText("Health");
+
+    // Family hunger
+    UIElement familyHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
+    familyHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/FamHungerProgressBar.png", &m_defaultFont);
+    UIElement familiyHungerBarText(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    familiyHungerBarText.SetText("Hunger");
 
 
     // Add UI objects to the UI vector
@@ -50,6 +56,11 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     uiObjects.insert(uiObjects.end(), &playerHealthBarBG);
     uiObjects.insert(uiObjects.end(), &playerHealthBar);
     uiObjects.insert(uiObjects.end(), &playerHealthBarText);
+
+    // Fam Hunger
+    uiObjects.insert(uiObjects.end(), &familyHungerBarBG);
+    uiObjects.insert(uiObjects.end(), &familyHungerBar);
+    uiObjects.insert(uiObjects.end(), &familiyHungerBarText);
     
     // Create the window
     window.create(sf::VideoMode(width, height), windowName);

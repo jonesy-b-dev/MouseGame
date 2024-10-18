@@ -18,11 +18,14 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
     enemySpawner = EnemySpawner(Transform(Vector2(100, 100), 0, Vector2(1, 1)), true);
+    Family family(Transform(Vector2(0, 420), 0, Vector2(1, 1)), true, &familyHungerBar);
+    family.SetTag("Family");
 
     // Add objects to the object vector
     gameObjects.insert(gameObjects.end(), &foodSpawner);
     gameObjects.insert(gameObjects.end(), &player);
     gameObjects.insert(gameObjects.end(), &enemySpawner);
+    gameObjects.insert(gameObjects.end(), &family);
 
     // Create UI objects
 

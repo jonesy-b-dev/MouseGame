@@ -2,6 +2,7 @@
 #include <math.h>
 #include <Time/Time.h>
 #include <iostream>
+#include "../Family/Family.h"
 
 void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 {
@@ -29,6 +30,8 @@ void Player::Update()
 	HandleInput();
 
 	// Collision
+
+	// Food
 	Object* foodObj = Object::CollidesWith("Food");
 	if (foodObj != false)
 	{
@@ -37,6 +40,8 @@ void Player::Update()
 		m_foodinventory++;
 		foodObj->deletionMark = true;
 	}
+
+	// Enemy
 	Object* enemyObj = Object::CollidesWith("Enemy");
 	if (enemyObj != false)
 	{
@@ -44,10 +49,18 @@ void Player::Update()
 		{
 			m_isCollidingWithEnemy = true;
 			std::cout << "Collide enemy" << std::endl;
-			m_health -= 20;
+	//		m_health -= 20;
 		}
 	}
 	else { m_isCollidingWithEnemy = false; }
+
+	// Family
+	Family* familyObj = dynamic_cast<Family*>(Object::CollidesWith("Family"));
+	if (familyObj != false)
+	{
+		familyObj->DeliverFood(m_foodinventory);
+		m_foodinventory = 0;
+	}
 
 	UpdateHunger();
 	// Update health bar UI

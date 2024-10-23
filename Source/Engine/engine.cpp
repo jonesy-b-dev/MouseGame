@@ -11,8 +11,9 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     if (!m_defaultFont.loadFromFile(defaultFontPath)) std::cerr << "Failed to load font\n";
 
     // Reserve space in the vectors because we know before how many items it will have initialy
-    gameObjects.reserve(4);
-    uiObjects.reserve(6);
+    // Plus some extra for the gameObjects since they will surely come
+    gameObjects.reserve(15);
+    uiObjects.reserve(14);
 
     // Create game objects
     Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar, &inventoryText);
@@ -28,6 +29,9 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     gameObjects.insert(gameObjects.end(), &family);
 
     // Create UI objects
+
+    // Background
+    UIElement uiBackground(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false, "Assets/UIBar.png", &m_defaultFont);
 
     // Inventory
     UIElement inventoryIcon(Transform(Vector2(850, 12), 0, Vector2(0.25, 0.25)), false, "Assets/UI/Inventory.png", &m_defaultFont);
@@ -55,6 +59,9 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
 
 
     // Add UI objects to the UI vector
+
+    // Background
+    uiObjects.insert(uiObjects.end(), &uiBackground);
     // Inventory icon
     uiObjects.insert(uiObjects.end(), &inventoryIcon);
     uiObjects.insert(uiObjects.end(), &inventoryText);

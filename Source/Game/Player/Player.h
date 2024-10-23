@@ -6,10 +6,12 @@ using namespace Engine;
 class Player : public Engine::Object
 {
 public:
-	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar, UIElement* healthBar)
+	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar, UIElement* healthBar, UIElement* inventoryCount)
 		: Object(transform, hasCollision), 
-		m_HungerbarRef(hungerBar), 
-		m_HealthBarRef(healthBar) {};
+		m_hungerbarRef(hungerBar), 
+		m_healthBarRef(healthBar),
+		m_inventoryCounterRef(inventoryCount) {};
+		
 
 private:
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
@@ -20,8 +22,10 @@ private:
 private:
 	bool m_isSafe = true;
 	float m_hunger = 100;
-	UIElement* m_HungerbarRef;
-	UIElement* m_HealthBarRef;
+	UIElement* m_hungerbarRef;
+	UIElement* m_healthBarRef;
+	UIElement* m_inventoryCounterRef;
+
 
 	// Current speed wil vary from value, default always stays the same
 	float m_currentSpeed = 140;

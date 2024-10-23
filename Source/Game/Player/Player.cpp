@@ -38,6 +38,7 @@ void Player::Update()
 		m_pickUpSound.play();
 		std::cout << "Collide" << std::endl;
 		m_foodinventory++;
+		m_inventoryCounterRef->SetText(std::to_string(m_foodinventory));
 		foodObj->deletionMark = true;
 	}
 
@@ -60,11 +61,13 @@ void Player::Update()
 	{
 		familyObj->DeliverFood(m_foodinventory);
 		m_foodinventory = 0;
+		m_inventoryCounterRef->SetText("o"); // when '0' set to 'o' because 0 is not in the font 
 	}
 
 	UpdateHunger();
+
 	// Update health bar UI
-	m_HealthBarRef->transform.scale.x = m_health / 100;
+	m_healthBarRef->transform.scale.x = m_health / 100;
 
 	if (m_health <= 0) Death();
 
@@ -93,6 +96,7 @@ void Player::Eat()
 		{
 			m_hunger = 100;
 		}
+		m_inventoryCounterRef->SetText(std::to_string(m_foodinventory));
 	}
 	std::cout << m_hunger << " inv:" << m_foodinventory << "\n";
 }
@@ -109,7 +113,7 @@ void Player::UpdateHunger()
 			Death();
 		}
 	}
-	m_HungerbarRef->transform.scale.x = m_hunger / 100;
+	m_hungerbarRef->transform.scale.x = m_hunger / 100;
 }
 
 void Player::HandleInput()

@@ -33,6 +33,9 @@ namespace Engine
 
 
 		// Objects placed here need to be passed to other classes, so definitions are here
+		// Inventory
+		UIElement inventoryText;
+
 		// Food
 		UIElement playerHungerBar;
 

@@ -15,7 +15,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     uiObjects.reserve(6);
 
     // Create game objects
-    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar);
+    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar, &inventoryText);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
     enemySpawner = EnemySpawner(Transform(Vector2(100, 100), 0, Vector2(1, 1)), true);
     Family family(Transform(Vector2(0, 420), 0, Vector2(1, 1)), true, &familyHungerBar);
@@ -28,6 +28,11 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     gameObjects.insert(gameObjects.end(), &family);
 
     // Create UI objects
+
+    // Inventory
+    UIElement inventoryIcon(Transform(Vector2(850, 12), 0, Vector2(0.25, 0.25)), false, "Assets/UI/Inventory.png", &m_defaultFont);
+    inventoryText = UIElement(Transform(Vector2(890, 12), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    inventoryText.SetText("o"); // Use o for 0 because font doesnt come with a 0, might change later
 
     // Hunger
     UIElement playerHungerBarBG(Transform(Vector2(1119, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
@@ -50,6 +55,10 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
 
 
     // Add UI objects to the UI vector
+    // Inventory icon
+    uiObjects.insert(uiObjects.end(), &inventoryIcon);
+    uiObjects.insert(uiObjects.end(), &inventoryText);
+
     // Hunger
     uiObjects.insert(uiObjects.end(), &playerHungerBarBG);
     uiObjects.insert(uiObjects.end(), &playerHungerBar);

@@ -19,6 +19,10 @@ private:
 	void Shutdown() override;
 
 	// Gameplay properties
+public:
+	void Death();
+	bool isDead = false;
+
 private:
 	bool m_isSafe = true;
 	float m_hunger = 100;
@@ -34,7 +38,6 @@ private:
 
 	float m_health = 100;
 	bool m_isCollidingWithEnemy = false;
-	bool m_isDead = false;
 	int m_foodinventory = 0;
 	bool m_keyEPressed = false;
 	float m_hungerTimer = 0;
@@ -42,8 +45,6 @@ private:
 
 	// Audio
 	sf::Sound m_pickUpSound;
-
-	void Death();
 	void Eat();
 	void UpdateHunger();
 	void HandleInput();

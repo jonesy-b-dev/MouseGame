@@ -24,7 +24,7 @@ void Player::Update()
 	// Always render the object
 	Object::Update();
 
-	if (m_isDead) return;
+	if (isDead) return;
 	// Only execute when player alive
 	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));
 	HandleInput();
@@ -82,7 +82,7 @@ void Player::Shutdown()
 void Player::Death()
 {
 	UpdateTexture("Assets/MainMouseDead.png");
-	m_isDead = true;
+	isDead = true;
 	std::cout << "Player died\n";
 }
 

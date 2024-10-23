@@ -36,12 +36,15 @@ namespace Engine
 		// Inventory
 		UIElement inventoryText;
 
-		// Food
+		// Hunger
 		UIElement playerHungerBar;
 
 		//Health
 		UIElement playerHealthBarText;
 		UIElement playerHealthBar;
+
+		// Score
+		UIElement playerScoreText;
 
 		// Family
 		UIElement familyHungerBar;

@@ -6,11 +6,12 @@ using namespace Engine;
 class Player : public Engine::Object
 {
 public:
-	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar, UIElement* healthBar, UIElement* inventoryCount)
+	Player(Engine::Transform transform, bool hasCollision, UIElement* hungerBar, UIElement* healthBar, UIElement* inventoryCount, UIElement* scoreText)
 		: Object(transform, hasCollision), 
 		m_hungerbarRef(hungerBar), 
 		m_healthBarRef(healthBar),
-		m_inventoryCounterRef(inventoryCount) {};
+		m_inventoryCounterRef(inventoryCount),
+		m_playerScoreRef(scoreText){};
 		
 
 private:
@@ -26,15 +27,17 @@ public:
 private:
 	bool m_isSafe = true;
 	float m_hunger = 100;
+
 	UIElement* m_hungerbarRef;
 	UIElement* m_healthBarRef;
 	UIElement* m_inventoryCounterRef;
+	UIElement* m_playerScoreRef;
 
 
 	// Current speed wil vary from value, default always stays the same
 	float m_currentSpeed = 140;
 	float m_defaultSpeed = 140;
-	float m_reductionValue = 0.90; // With how much the speed is going to get multiplied for each item in the inventory
+	float m_reductionValue = 0.90f; // With how much the speed is going to get multiplied for each item in the inventory
 
 	float m_health = 100;
 	bool m_isCollidingWithEnemy = false;
@@ -42,7 +45,7 @@ private:
 	bool m_keyEPressed = false;
 	float m_hungerTimer = 0;
 	float m_hungerSpeed = 0.5; // Amount of seconds hunger will go down by 1
-
+	int m_score = 0;
 	// Audio
 	sf::Sound m_pickUpSound;
 	void Eat();

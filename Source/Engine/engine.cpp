@@ -16,7 +16,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     uiObjects.reserve(14);
 
     // Create game objects
-    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar, &inventoryText);
+    Player player(Transform(Vector2(200, 200), 0, Vector2(0.2, 0.2)), true, &playerHungerBar, &playerHealthBar, &inventoryText, &playerScoreText);
     foodSpawner = FoodSpawner(Transform(Vector2(0, 0), 0, Vector2(1, 1)), false);
     enemySpawner = EnemySpawner(Transform(Vector2(100, 100), 0, Vector2(1, 1)), true);
     Family family(Transform(Vector2(0, 420), 0, Vector2(1, 1)), true, &familyHungerBar);
@@ -51,7 +51,11 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     playerHealthBarText = UIElement(Transform(Vector2(984, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
     playerHealthBarText.SetText("Health");
 
-    // Family hunger
+    // Score
+    playerScoreText = UIElement(Transform(Vector2(300, 12), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    playerScoreText.SetText("Score: 0");
+    
+    // Family
     UIElement familyHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     familyHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/FamHungerProgressBar.png", &m_defaultFont);
     UIElement familiyHungerBarText(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
@@ -75,6 +79,9 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     uiObjects.insert(uiObjects.end(), &playerHealthBarBG);
     uiObjects.insert(uiObjects.end(), &playerHealthBar);
     uiObjects.insert(uiObjects.end(), &playerHealthBarText);
+
+    // Score
+    uiObjects.insert(uiObjects.end(), &playerScoreText);
 
     // Fam Hunger
     uiObjects.insert(uiObjects.end(), &familyHungerBarBG);

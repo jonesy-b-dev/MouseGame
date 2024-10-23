@@ -19,6 +19,7 @@ void Player::Start(sf::RenderWindow* window, std::vector<Object*>* objectList)
 	Object::Start(window, objectList);
 	//std::cout << "Player start\n";
 }
+
 void Player::Update()
 {
 	// Always render the object
@@ -40,6 +41,7 @@ void Player::Update()
 		m_foodinventory++;
 		m_inventoryCounterRef->SetText(std::to_string(m_foodinventory));
 		foodObj->deletionMark = true;
+		m_score++;
 	}
 
 	// Enemy
@@ -59,6 +61,7 @@ void Player::Update()
 	Family* familyObj = dynamic_cast<Family*>(Object::CollidesWith("Family"));
 	if (familyObj != false)
 	{
+		m_score += 5 * m_foodinventory;
 		familyObj->DeliverFood(m_foodinventory);
 		m_foodinventory = 0;
 		m_inventoryCounterRef->SetText("o"); // when '0' set to 'o' because 0 is not in the font 
@@ -68,6 +71,9 @@ void Player::Update()
 
 	// Update health bar UI
 	m_healthBarRef->transform.scale.x = m_health / 100;
+
+	//std::string scoreText = "Score: " + std::to_string(m_score);
+	m_playerScoreRef->SetText("Score: " + std::to_string(m_score));
 
 	if (m_health <= 0) Death();
 
@@ -91,6 +97,7 @@ void Player::Eat()
 	if (m_foodinventory != 0)
 	{
 		m_foodinventory--;
+		m_score++;
 		m_hunger += 30;
 		if (m_hunger > 100)
 		{

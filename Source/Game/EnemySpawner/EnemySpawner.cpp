@@ -38,7 +38,7 @@ void EnemySpawner::SpawnEnemy()
         if (Engine::Random::RandomRange(2, 3) == 3)
         {
             //std::cout << "spawned food\n";
-            Enemy* enemyToAdd = new Enemy(Transform(Vector2(Random::RandomRange(2400, 1460), Random::RandomRange(100, 700)), 0, Vector2(0.3, 0.3)), true);
+            Enemy* enemyToAdd = new Enemy(Transform(Vector2(Random::RandomRange(2400, 1460), Random::RandomRange(100, 700)), 0, Vector2(-0.3, -0.3)), true);
             m_tempObjectList.insert(m_tempObjectList.end(), enemyToAdd);
             enemyToAdd->Start(m_window, m_gameObjectRef);
             enemyToAdd->SetTag("Enemy");

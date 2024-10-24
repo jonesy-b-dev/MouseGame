@@ -48,6 +48,9 @@ bool Enemy::MoveToNewPosition(Engine::Vector2 targetPosition)
 
     // Get the distance to the target
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    float angleInRadians = std::atan2(direction.y, direction.x);
+    float inDegrees = angleInRadians * (180.0f / 3.1415926535);
+    transform.rotation = inDegrees;
 
     // Normalize the direction vector
     if (distance > 0)
@@ -59,7 +62,6 @@ bool Enemy::MoveToNewPosition(Engine::Vector2 targetPosition)
     // If the enemy is close enough to the target, stop moving and return true (to find a new position)
     if (distance < Engine::Random::RandomRange(6, 12)) // Amount of pixels
     {
-        test = true;
         return true;
     }
 

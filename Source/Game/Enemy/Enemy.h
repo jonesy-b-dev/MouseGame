@@ -16,7 +16,6 @@ private:
 	// Gameplay properties
 private:
 	float m_speed = 0.5;
-	bool test = false;
 
 	// Timeing variables for waiting inbetween moving
 	float m_waitTime = Engine::Random::RandomRange(1, 3);

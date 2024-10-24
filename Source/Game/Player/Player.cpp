@@ -65,7 +65,7 @@ void Player::Update()
 		{
 			m_isCollidingWithEnemy = true;
 			std::cout << "Collide enemy" << std::endl;
-	//		m_health -= 20;
+			m_health -= 10;
 		}
 	}
 	else { m_isCollidingWithEnemy = false; }

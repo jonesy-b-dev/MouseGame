@@ -50,7 +50,7 @@ bool Enemy::MoveToNewPosition(Engine::Vector2 targetPosition)
     float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     float angleInRadians = std::atan2(direction.y, direction.x);
     float inDegrees = angleInRadians * (180.0f / 3.1415926535);
-    transform.rotation = inDegrees;
+	transform.rotation = angleInRadians * (180.0f / 3.1415926535); // Transform to degrees
 
     // Normalize the direction vector
     if (distance > 0)

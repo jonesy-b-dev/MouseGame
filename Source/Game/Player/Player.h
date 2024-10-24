@@ -38,6 +38,7 @@ private:
 	float m_currentSpeed = 140;
 	float m_defaultSpeed = 140;
 	float m_reductionValue = 0.90f; // With how much the speed is going to get multiplied for each item in the inventory
+	Vector2 lastPosition;
 
 	float m_health = 100;
 	bool m_isCollidingWithEnemy = false;

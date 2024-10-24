@@ -25,13 +25,26 @@ void Player::Update()
 	// Always render the object
 	Object::Update();
 
+	if (m_health <= 0) Death();
+
 	if (isDead) return;
+
 	// Only execute when player alive
 	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));
+	lastPosition = transform.position;
 	HandleInput();
 
-	// Collision
+	// Rotate sprite towards way og moving
+	Vector2 direction = transform.position.Subtract(lastPosition);
 
+	// Check if they are both not 0 so the sprite doesnt rotate to 0deg when no input is provided
+	if (direction.x != 0 || direction.y != 0)
+	{
+		float angleInRadians = std::atan2(direction.y, direction.x);
+		transform.rotation = angleInRadians * (180.0f / 3.1415926535); // Transform to degrees
+	}
+
+	/// Collision
 	// Food
 	Object* foodObj = Object::CollidesWith("Food");
 	if (foodObj != false)
@@ -74,8 +87,6 @@ void Player::Update()
 
 	//std::string scoreText = "Score: " + std::to_string(m_score);
 	m_playerScoreRef->SetText("Score: " + std::to_string(m_score));
-
-	if (m_health <= 0) Death();
 
 	//std::cout << "Player update\n";
 }
@@ -129,22 +140,18 @@ void Player::HandleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		transform.position.y -= m_currentSpeed * Engine::Time::deltaTime;
-		transform.rotation = 270;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		transform.position.x -= m_currentSpeed * Engine::Time::deltaTime;
-		transform.rotation = 180;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		transform.position.y += m_currentSpeed * Engine::Time::deltaTime;
-		transform.rotation = 90;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		transform.position.x += m_currentSpeed * Engine::Time::deltaTime;
-		transform.rotation = 0;
 	}
 
 	/// Other inputs

@@ -6,6 +6,7 @@
 #include "../Game/FoodSpawner/FoodSpawner.h"
 #include "../Game/GameInclude.h"
 #include <vector>
+#include <algorithm>
 
 namespace Engine
 {
@@ -13,7 +14,7 @@ namespace Engine
 	{
 	public: 
 		EngineCore() {};
-		void Start(const char* windowName, int width, int height, const char* defaultFontPath);
+		void Start(const char* windowName, int width, int height, std::filesystem::path defaultFontPath);
 	private:
         sf::Event event;
 		sf::RenderWindow window;
@@ -26,7 +27,7 @@ namespace Engine
 
 		sf::Sprite m_background;
 		sf::Texture m_backgroundTex;
-		const char* m_backgroundPath = "Assets/Background.png";
+		std::filesystem::path m_backgroundPath = "Assets/Background.png";
 
 		sf::Font m_defaultFont;
 		int objectCount = 0;

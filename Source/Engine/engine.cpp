@@ -1,14 +1,13 @@
 #include "engine.h"
 #include <Time/Time.h>
-#include <algorithm>
 #include <iostream>
 
 using namespace Engine;
 
-void Engine::EngineCore::Start(const char* windowName, int width, int height, const char* defaultFontPath)
+void Engine::EngineCore::Start(const char* windowName, int width, int height, std::filesystem::path defaultFontPath)
 {
     // Load font
-    if (!m_defaultFont.loadFromFile(defaultFontPath)) std::cerr << "Failed to load font\n";
+    if (!m_defaultFont.loadFromFile(defaultFontPath.string())) std::cerr << "Failed to load font\n";
 
     // Reserve space in the vectors because we know before how many items it will have initialy
     // Plus some extra for the gameObjects since they will surely come
@@ -35,30 +34,30 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
 
     // Inventory
     UIElement inventoryIcon(Transform(Vector2(850, 12), 0, Vector2(0.25, 0.25)), false, "Assets/UI/Inventory.png", &m_defaultFont);
-    inventoryText = UIElement(Transform(Vector2(890, 12), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    inventoryText = UIElement(Transform(Vector2(890, 12), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     inventoryText.SetText("o"); // Use o for 0 because font doesnt come with a 0, might change later
 
     // Hunger
     UIElement playerHungerBarBG(Transform(Vector2(1119, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     playerHungerBar = UIElement(Transform(Vector2(1124, 15), 0, Vector2(1, 1)), false, "Assets/UI/HungerProgressBar.png", &m_defaultFont);
-    UIElement playerHungerBarText(Transform(Vector2(1164, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    UIElement playerHungerBarText(Transform(Vector2(1164, 16), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     playerHungerBarText.SetText("Hunger");
 
 
     // Health
     UIElement playerHealthBarBG(Transform(Vector2(939, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     playerHealthBar = UIElement(Transform(Vector2(944, 15), 0, Vector2(1, 1)), false, "Assets/UI/HealthProgressBar.png", &m_defaultFont);
-    playerHealthBarText = UIElement(Transform(Vector2(984, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    playerHealthBarText = UIElement(Transform(Vector2(984, 16), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     playerHealthBarText.SetText("Health");
 
     // Score
-    playerScoreText = UIElement(Transform(Vector2(300, 12), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    playerScoreText = UIElement(Transform(Vector2(300, 12), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     playerScoreText.SetText("Score: 0");
     
     // Family
     UIElement familyHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     familyHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/FamHungerProgressBar.png", &m_defaultFont);
-    UIElement familiyHungerBarText(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, NULL, &m_defaultFont);
+    UIElement familiyHungerBarText(Transform(Vector2(55, 16), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     familiyHungerBarText.SetText("Hunger");
 
 
@@ -103,7 +102,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, co
     }
 
     // Load and set background
-    if (!m_backgroundTex.loadFromFile(m_backgroundPath))
+    if (!m_backgroundTex.loadFromFile(m_backgroundPath.string()))
     {
 	    std::cerr << "Failed to load background image\n";
     }

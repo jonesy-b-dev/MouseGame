@@ -9,9 +9,9 @@ void Engine::Object::Start(sf::RenderWindow* window, std::vector<Object*>* objec
 	m_window = window;
 
 	// Check if a sprite path has been provided if yes load thetexture
-	if (spritePath != NULL)
+	if (spritePath != "")
 	{
-		if (!texture.loadFromFile(spritePath))
+		if (!texture.loadFromFile(spritePath.string()))
 		{
 			std::cerr << "Failed to load image\n";
 			return;

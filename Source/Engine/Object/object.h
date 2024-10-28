@@ -36,5 +36,6 @@ namespace Engine
 
 		virtual Engine::Object* CollidesWith(std::string tagToCompare);
 		void UpdateTexture(const char* pathToNewTexture);
+		void DrawCollisionBox();
 	};
 }

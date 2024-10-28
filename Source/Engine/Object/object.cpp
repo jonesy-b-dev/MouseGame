@@ -36,6 +36,8 @@ void Engine::Object::Update()
 	sprite.setPosition(transform.position.x, transform.position.y);
 	sprite.setScale(transform.scale.x, transform.scale.y);
 	sprite.setRotation(transform.rotation);
+
+	DrawCollisionBox();
 	m_window->draw(sprite);
 }
 
@@ -72,4 +74,18 @@ void Engine::Object::UpdateTexture(const char* pathToNewTexture)
 		}
 		sprite.setTexture(texture);
 	}
+}
+
+void Engine::Object::DrawCollisionBox()
+{
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    // Create a rectangle shape for the bounding box
+    sf::RectangleShape boundingBox;
+    boundingBox.setSize(sf::Vector2f(spriteBounds.width, spriteBounds.height));
+    boundingBox.setPosition(spriteBounds.left, spriteBounds.top);
+    boundingBox.setFillColor(sf::Color::Transparent);
+    boundingBox.setOutlineColor(sf::Color::Red);
+    boundingBox.setOutlineThickness(1.0f);
+
+	m_window->draw(boundingBox);
 }

@@ -25,9 +25,9 @@ void Player::Update()
 	// Always render the object
 	Object::Update();
 
-	if (m_health <= 0) Death();
-
 	if (isDead) return;
+
+	if (m_health <= 0) Death();
 
 	// Only execute when player alive
 	m_currentSpeed = m_defaultSpeed * (std::powf(m_reductionValue, m_foodinventory));

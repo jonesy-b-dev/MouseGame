@@ -5,7 +5,9 @@ A simple 2D game about collecting food as a mouse made in SFML 2.6.1. You slowly
 
 ## About branches
 main - most up do date default branch with all the work
+
 exam - The state where the project was when finishing my exam
+
 If any other branch exists its probably a developing branch testing some stuff
 
 

@@ -13,5 +13,6 @@ If any other branch exists its probably a developing branch testing some stuff
 
 ## How to run the project
 * Clone repository
-* Make sure to either have premake5 in your `$PATH` or have the `premake5.exe` in the root of the repository.
+* Open the project directory in your terminal
 * Run premake5 for your desired editor e.g. cmd: `premake5 vs2022` (Linux support in development)
+* Open the solution file and run the project

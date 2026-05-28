@@ -41,3 +41,6 @@ MouseGame.vcxproj.filters
 # Build files
 Makefile
 *.make
+
+# Compile commands
+compile_commands.json

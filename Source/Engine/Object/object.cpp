@@ -49,8 +49,8 @@ void Engine::Object::Shutdown()
 Engine::Object* Engine::Object::CollidesWith(std::string tagToCompare)
 {
 	// Instantly return when object doesnt have collision
-	if (!m_HasCollision) return false;
-	for each (Object* gameObject in *m_gameObjectRef)
+	if (!m_HasCollision) return NULL;
+	for (Object* gameObject : *m_gameObjectRef)
 	{
 		if (gameObject->GetTag() == tagToCompare)
 		{
@@ -60,7 +60,7 @@ Engine::Object* Engine::Object::CollidesWith(std::string tagToCompare)
 			}
 		}
 	}
-	return false;
+	return NULL;
 }
 
 void Engine::Object::UpdateTexture(const char* pathToNewTexture)

@@ -1,98 +1,123 @@
 workspace "MouseGame"
-    configurations { "Debug", "Release", "Dist" }
-    architecture "x64"
+configurations { "Debug", "Release", "Dist" }
+architecture "x64"
+
+local SFML_ROOT = "Dependencies/SFML-2.6.1"
+local SFML_BUILD = "Dependencies/SFML-2.6.1/build"
+
+project "SFML"
+	kind "Makefile"
+
+	-- CMake configure + build, runs before anything else
+	buildcommands {
+		-- Configure
+		"cmake -S " .. SFML_ROOT .. " -B " .. SFML_BUILD .. " -DCMAKE_BUILD_TYPE=%{cfg.buildcfg} -DBUILD_SHARED_LIBS=OFF -DSFML_BUILD_EXAMPLES=OFF -DSFML_BUILD_DOC=OFF",
+		-- Build
+		"cmake --build " .. SFML_BUILD .. " --config %{cfg.buildcfg} --parallel"
+	}
+	-- Makefile projects need a "clean" command too
+	cleancommands {
+		"cmake --build " .. SFML_BUILD .. " --target clean"
+	}
+	-- Dummy output so premake knows when to re-run
+	buildoutputs { SFML_BUILD .. "/lib/libsfml-system-s.a" }
 
 project "MouseGame"
-    kind "ConsoleApp"
-    language "C++"
-    OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
-    targetdir("build/" .. OutputDir .. "/")
-    objdir("build/Intermediates" .. OutputDir .. "/")
+	kind "ConsoleApp"
+	language "C++"
+    cppdialect "C++17"
 
-    files{
-        "source/**.h",
-        "source/**.hpp",
-        "source/**.c",
-        "source/**.cpp"
-    }
+	OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
+	targetdir("build/" .. OutputDir .. "/")
+	objdir("build/Intermediates" .. OutputDir .. "/")
 
-    includedirs{
-        "Dependencies/SFML-2.6.1/include",
-        -- Engine headers
-        "source/Engine"
-    }
+	dependson { "SFML" }
 
-    libdirs{"Dependencies/SFML-2.6.1/lib"}
+	files {
+		"Source/**.h",
+		"Source/**.hpp",
+		"Source/**.c",
+		"Source/**.cpp"
+	}
 
-    -- Libs we need for SFML
-    links { 
-        "opengl32.lib",
-        "freetype.lib", 
-        "winmm.lib", 
-        "gdi32.lib",
-        "openal32.lib",
-        "flac.lib",
-        "vorbisenc.lib",
-        "vorbisfile.lib",
-        "vorbis.lib",
-        "ogg.lib",
-        "ws2_32.lib" 
-    }
-    -- Windows specific settings, maybe needed for Linux support we wont have
+	includedirs {
+		SFML_ROOT .. "/include",
+		-- Engine headers
+		"Source/Engine"
+	}
+
+	defines { "SFML_STATIC" }
+
+	libdirs { SFML_BUILD .. "/lib" }
+
+	-- Platform specific links
     filter "system:windows"
-        cppdialect "C++17"
         systemversion "latest"
-
-    defines { "GAME_PLATFORM_WINDOWS", "SFML_STATIC" }
-
-    -- Settings for different build modes
-    filter "configurations:Debug"
-        defines { "DEBUG", "ST_PLATFORM_WINDOWS" }
-        runtime "Debug"
-        symbols "On"
-        -- Debug variants for SFML libs
-        links { 
-            "sfml-audio-s-d.lib",
-            "sfml-graphics-s-d.lib",
-            "sfml-network-s-d.lib",
-            "sfml-system-s-d.lib",
-            "sfml-window-s-d.lib" 
-        }
-        postbuildcommands {
-           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
+        defines { "GAME_PLATFORM_WINDOWS" }
+        links {
+            "opengl32", "freetype", "winmm",
+            "gdi32", "openal32", "flac",
+            "vorbisenc", "vorbisfile", "vorbis",
+            "ogg", "ws2_32",
         }
 
-    filter "configurations:Release"
-        defines { "RELEASE", "ST_PLATFORM_WINDOWS" }
-        runtime "Release"
-        optimize "On"
-        symbols "On"
-        -- Normal release variants for SFML libs
-        links { 
-            "sfml-audio-s.lib",
-            "sfml-graphics-s.lib",
-            "sfml-network-s.lib",
-            "sfml-system-s.lib",
-            "sfml-window-s.lib" 
-        }
-        postbuildcommands {
-           '{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
-           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
+    filter "system:linux"
+        defines { "GAME_PLATFORM_LINUX" }
+        links {
+            "GL", "X11", "Xrandr", "Xi",
+            "freetype", "udev", "openal",
+            "FLAC", "Xcursor", "vorbisenc", "vorbisfile",
+            "vorbis", "ogg", "pthread",
         }
 
-    filter "configurations:Dist"
-        defines { "DIST", "ST_PLATFORM_WINDOWS" }
-        runtime "Release"
-        optimize "On"
-        symbols "Off"
-        links { 
-            "sfml-audio-s.lib",
-            "sfml-graphics-s.lib",
-            "sfml-network-s.lib",
-            "sfml-system-s.lib",
-            "sfml-window-s.lib" 
-        }
-        postbuildcommands {
-           '{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
-           '{COPY} "%{wks.location}Dependencies/SFML-2.6.1/bin/openal32.dll" "%{cfg.targetdir}"'
-        }
+	-- Settings for different build modes
+
+	filter "configurations:Debug"
+		defines { "DEBUG" }
+		runtime "Debug"
+		symbols "On"
+		links {
+			"sfml-audio-s-d",
+			"sfml-graphics-s-d",
+			"sfml-network-s-d",
+			"sfml-window-s-d",
+			"sfml-system-s-d",
+		}
+
+		postbuildcommands {
+			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+		}
+
+	filter "configurations:Release"
+		defines { "RELEASE", "ST_PLATFORM_WINDOWS" }
+		runtime "Release"
+		optimize "On"
+		symbols "On"
+		links {
+			"sfml-audio-s",
+			"sfml-graphics-s",
+			"sfml-network-s",
+			"sfml-window-s",
+			"sfml-system-s",
+		}
+
+		postbuildcommands {
+			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+		}
+
+	filter "configurations:Dist"
+		defines { "DIST", "ST_PLATFORM_WINDOWS" }
+		runtime "Release"
+		optimize "On"
+		symbols "Off"
+	    links {
+			"sfml-audio-s",
+			"sfml-graphics-s",
+			"sfml-network-s",
+			"sfml-window-s",
+			"sfml-system-s",
+		}
+
+		postbuildcommands {
+			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+		}

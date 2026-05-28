@@ -8,7 +8,7 @@ public:
 	Enemy() {};
 	Enemy(Engine::Transform transform, bool hasCollision) : Object(transform, hasCollision) {};
 	void Start(sf::RenderWindow* window, std::vector<Object*>* objectList) override;
-	
+
 private:
 	void Update() override;
 	void Shutdown() override;

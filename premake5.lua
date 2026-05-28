@@ -11,7 +11,7 @@ project "SFML"
 	-- CMake configure + build, runs before anything else
 	buildcommands {
 		-- Configure
-		"cmake -S " .. SFML_ROOT .. " -B " .. SFML_BUILD .. " -DCMAKE_BUILD_TYPE=%{cfg.buildcfg} -DBUILD_SHARED_LIBS=OFF -DSFML_BUILD_EXAMPLES=OFF -DSFML_BUILD_DOC=OFF",
+		"cmake -S " .. SFML_ROOT .. " -B " .. SFML_BUILD .. " -DCMAKE_BUILD_TYPE=%{cfg.buildcfg} -DBUILD_SHARED_LIBS=OFF -DSFML_BUILD_EXAMPLES=OFF -DSFML_BUILD_DOC=OFF -DSFML_INSTALL_PKGCONFIG_FILES=OFF",
 		-- Build
 		"cmake --build " .. SFML_BUILD .. " --config %{cfg.buildcfg} --parallel"
 	}
@@ -85,7 +85,7 @@ project "MouseGame"
 		}
 
 		postbuildcommands {
-			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+			"cp -rf ./Assets %{cfg.targetdir}/Assets",
 		}
 
 	filter "configurations:Release"
@@ -102,7 +102,7 @@ project "MouseGame"
 		}
 
 		postbuildcommands {
-			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+			"cp -rf ./Assets %{cfg.targetdir}/Assets",
 		}
 
 	filter "configurations:Dist"
@@ -119,5 +119,5 @@ project "MouseGame"
 		}
 
 		postbuildcommands {
-			'{COPYDIR} "%{wks.location}Assets" "%{cfg.targetdir}/Assets"',
+			"cp -rf ./Assets %{cfg.targetdir}/Assets",
 		}

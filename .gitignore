@@ -37,3 +37,7 @@ obj
 .vs
 build
 MouseGame.vcxproj.filters
+
+# Build files
+Makefile
+*.make

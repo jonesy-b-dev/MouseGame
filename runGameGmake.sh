@@ -9,5 +9,5 @@ if ! bear -- make config=debug; then
     exit 1
 fi
 
-./bin/Debug/MouseGame
+./build/linux-x86_64/Debug/MouseGame
 

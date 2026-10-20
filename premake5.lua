@@ -4,23 +4,30 @@ architecture "x64"
 
 local SFML_ROOT = "Dependencies/SFML-2.6.1"
 local SFML_BUILD = "Dependencies/SFML-2.6.1/build"
+-- Dist builds SFML as Release
+local SFML_CFG = "%{cfg.buildcfg == 'Debug' and 'Debug' or 'Release'}"
+
+local SFML_EXTRA_ARGS = ""
+if os.target() == "windows" then
+	SFML_EXTRA_ARGS = " -DOPENAL_INCLUDE_DIR=\"%{wks.location}/" .. SFML_ROOT .. "/extlibs/headers/AL\""
+end
 
 project "SFML"
 	kind "Makefile"
 
-	-- CMake configure + build, runs before anything else
 	buildcommands {
-		-- Configure
-		"cmake -S " .. SFML_ROOT .. " -B " .. SFML_BUILD .. " -DCMAKE_BUILD_TYPE=%{cfg.buildcfg} -DBUILD_SHARED_LIBS=OFF -DSFML_BUILD_EXAMPLES=OFF -DSFML_BUILD_DOC=OFF -DSFML_INSTALL_PKGCONFIG_FILES=OFF",
-		-- Build
-		"cmake --build " .. SFML_BUILD .. " --config %{cfg.buildcfg} --parallel"
+		"cmake -S " .. SFML_ROOT .. " -B " .. SFML_BUILD .. " -DCMAKE_BUILD_TYPE=" .. SFML_CFG .. " -DBUILD_SHARED_LIBS=OFF -DSFML_BUILD_EXAMPLES=OFF -DSFML_BUILD_DOC=OFF -DSFML_INSTALL_PKGCONFIG_FILES=OFF" .. SFML_EXTRA_ARGS,
+		"cmake --build " .. SFML_BUILD .. " --config " .. SFML_CFG .. " --parallel"
 	}
-	-- Makefile projects need a "clean" command too
 	cleancommands {
 		"cmake --build " .. SFML_BUILD .. " --target clean"
 	}
-	-- Dummy output so premake knows when to re-run
-	buildoutputs { SFML_BUILD .. "/lib/libsfml-system-s.a" }
+
+	filter "system:windows"
+		buildoutputs { SFML_BUILD .. "/lib/" .. SFML_CFG .. "/sfml-system-s%{cfg.buildcfg == 'Debug' and '-d' or ''}.lib" }
+
+	filter "system:linux"
+		buildoutputs { SFML_BUILD .. "/lib/libsfml-system-s.a" }
 
 project "MouseGame"
 	kind "ConsoleApp"
@@ -32,6 +39,9 @@ project "MouseGame"
 	objdir("build/Intermediates" .. OutputDir .. "/")
 
 	dependson { "SFML" }
+
+	postbuildcommands { "{COPYDIR} Assets %{cfg.targetdir}/Assets" }
+
 
 	files {
 		"Source/**.h",
@@ -49,6 +59,12 @@ project "MouseGame"
 	defines { "SFML_STATIC" }
 
 	libdirs { SFML_BUILD .. "/lib" }
+
+	filter "system:windows"
+		libdirs {
+			SFML_BUILD .. "/lib/" .. SFML_CFG,
+			SFML_ROOT .. "/extlibs/libs-msvc-universal/x64"
+		}
 
 	-- Platform specific links
     filter "system:windows"
@@ -84,10 +100,6 @@ project "MouseGame"
 			"sfml-system-s-d",
 		}
 
-		postbuildcommands {
-			"cp -rf ./Assets %{cfg.targetdir}/Assets",
-		}
-
 	filter "configurations:Release"
 		defines { "RELEASE", "ST_PLATFORM_WINDOWS" }
 		runtime "Release"
@@ -101,10 +113,6 @@ project "MouseGame"
 			"sfml-system-s",
 		}
 
-		postbuildcommands {
-			"cp -rf ./Assets %{cfg.targetdir}/Assets",
-		}
-
 	filter "configurations:Dist"
 		defines { "DIST", "ST_PLATFORM_WINDOWS" }
 		runtime "Release"
@@ -116,8 +124,4 @@ project "MouseGame"
 			"sfml-network-s",
 			"sfml-window-s",
 			"sfml-system-s",
-		}
-
-		postbuildcommands {
-			"cp -rf ./Assets %{cfg.targetdir}/Assets",
 		}

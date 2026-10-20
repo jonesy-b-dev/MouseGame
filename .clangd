@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - "-ISource/Engine"
+    - "-IDependencies/SFML-2.6.1/include"

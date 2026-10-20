@@ -53,7 +53,7 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, st
     // Score
     playerScoreText = UIElement(Transform(Vector2(300, 12), 0, Vector2(1, 1)), false, "", &m_defaultFont);
     playerScoreText.SetText("Score: 0");
-    
+
     // Family
     UIElement familyHungerBarBG(Transform(Vector2(10, 10), 0, Vector2(1, 1)), false, "Assets/UI/HungerBackGroundBar.png", &m_defaultFont);
     familyHungerBar = UIElement(Transform(Vector2(15, 15), 0, Vector2(1, 1)), false, "Assets/UI/FamHungerProgressBar.png", &m_defaultFont);
@@ -86,17 +86,17 @@ void Engine::EngineCore::Start(const char* windowName, int width, int height, st
     uiObjects.insert(uiObjects.end(), &familyHungerBarBG);
     uiObjects.insert(uiObjects.end(), &familyHungerBar);
     uiObjects.insert(uiObjects.end(), &familiyHungerBarText);
-    
+
     // Create the window
     window.create(sf::VideoMode(width, height), windowName);
 
-    for each (Object* gameObject in gameObjects)
+    for (Object* gameObject : gameObjects)
     {
         gameObject->Start(&window, &gameObjects);
     }
     objectCount = gameObjects.size();
 
-    for each (Object* uiObject in uiObjects)
+    for (Object* uiObject : uiObjects)
     {
         uiObject->Start(&window, &gameObjects);
     }
@@ -131,9 +131,9 @@ void Engine::EngineCore::Update()
 
         // Render background first
         window.draw(m_background);
-        
+
         // Call update for all the objects in the game (including rendering the items)
-        for each (Object* gameObject in gameObjects)
+        for (Object* gameObject : gameObjects)
         {
             gameObject->Update();
             if (gameObject->deletionMark)
@@ -143,18 +143,18 @@ void Engine::EngineCore::Update()
         }
 
         // Same for UI
-        for each (Object* uiObject in uiObjects)
+        for (Object* uiObject : uiObjects)
         {
             uiObject->Update();
         }
 
-        // Call post update functions here: 
+        // Call post update functions here:
         foodSpawner.PostUpdate();
         enemySpawner.PostUpdate();
 
 
         // Remove all objects from the list that have been marked for removal
-        for each (Object* removedObject in toRemoveObjects)
+        for (Object* removedObject : toRemoveObjects)
         {
             auto it = std::find(gameObjects.begin(), gameObjects.end(), removedObject);
             gameObjects.erase(it);
@@ -171,12 +171,12 @@ void Engine::EngineCore::Update()
 
 void Engine::EngineCore::Shutdown()
 {
-    for each (Object* object in gameObjects)
+    for (Object* object : gameObjects)
     {
         object->Shutdown();
     }
 
-    for each (Object* uiObject in uiObjects)
+    for (Object* uiObject : uiObjects)
     {
         uiObject->Shutdown();
     }

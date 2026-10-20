@@ -47,7 +47,7 @@ void Player::Update()
 	/// Collision
 	// Food
 	Object* foodObj = Object::CollidesWith("Food");
-	if (foodObj != false)
+	if (foodObj)
 	{
 		m_pickUpSound.play();
 		std::cout << "Collide" << std::endl;
@@ -59,7 +59,7 @@ void Player::Update()
 
 	// Enemy
 	Object* enemyObj = Object::CollidesWith("Enemy");
-	if (enemyObj != false)
+	if (enemyObj)
 	{
 		if (!m_isCollidingWithEnemy)
 		{
@@ -72,12 +72,12 @@ void Player::Update()
 
 	// Family
 	Family* familyObj = dynamic_cast<Family*>(Object::CollidesWith("Family"));
-	if (familyObj != false)
+	if (familyObj)
 	{
 		m_score += 5 * m_foodinventory;
 		familyObj->DeliverFood(m_foodinventory);
 		m_foodinventory = 0;
-		m_inventoryCounterRef->SetText("o"); // when '0' set to 'o' because 0 is not in the font 
+		m_inventoryCounterRef->SetText("o"); // when '0' set to 'o' because 0 is not in the font
 	}
 
 	UpdateHunger();

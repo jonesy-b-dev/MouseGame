@@ -30,6 +30,3 @@ sudo pacman -S base-devel cmake mesa libx11 libxrandr libxi libxcursor freetype2
 sudo pacman -S premake
 ```
 * Run ./runGameGmake.sh
-
-* On linux you can then run the `./runGameGmake.sh`. On windows just open in Visual Studio or your normal method.
-Make sure to have OpenAL installed too.
